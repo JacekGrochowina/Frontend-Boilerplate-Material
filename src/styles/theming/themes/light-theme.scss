@@ -1,0 +1,19 @@
+@use '@angular/material' as mat;
+
+// Custom Palettes
+@use "./../palettes/navy-palette" as md; // example of using custom palette
+
+//$light-theme-primary: mat.define-palette(md.$navy-palette, 400); // example of using custom palette
+$light-theme-primary: mat.define-palette(mat.$indigo-palette, 400);
+$light-theme-accent: mat.define-palette(mat.$orange-palette, 700);
+$light-theme-warn: mat.define-palette(mat.$red-palette, 600);
+
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: $light-theme-primary,
+    accent: $light-theme-accent,
+    warn: $light-theme-warn,
+  ),
+  //typography: mat.define-typography-config(), // example of using custom typography
+  //density: 0, // example of using custom density
+));

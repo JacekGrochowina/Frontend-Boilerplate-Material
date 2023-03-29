@@ -1,0 +1,34 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Themes
+@import "./themes/light-theme";
+@import "./themes/dark-theme";
+
+// Core classes
+.light-theme {
+  @include mat.all-component-themes($light-theme);
+  $primary: mat.get-color-from-palette($light-theme-primary);
+  $accent: mat.get-color-from-palette($light-theme-accent);
+  $warn: mat.get-color-from-palette($light-theme-warn);
+
+  --primary: #{$primary};
+  --accent: #{$accent};
+  --warn: #{$warn};
+  --light: rgb(255, 255, 255);
+  --active: rgba(0, 0, 0, 0.04);
+}
+
+.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+  $primary: mat.get-color-from-palette($dark-theme-primary);
+  $accent: mat.get-color-from-palette($dark-theme-accent);
+  $warn: mat.get-color-from-palette($dark-theme-warn);
+
+  --primary: #{$primary};
+  --accent: #{$accent};
+  --warn: #{$warn};
+  --light: rgba(0, 0, 0);
+  --active: rgba(255, 255, 255, 0.04);
+}
