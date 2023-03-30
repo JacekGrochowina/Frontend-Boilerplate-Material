@@ -8,7 +8,7 @@
 
 // Core classes
 .light-theme {
-  @include mat.all-component-themes($light-theme);
+  @include mat.all-component-colors($light-theme);
   $primary: mat.get-color-from-palette($light-theme-primary);
   $accent: mat.get-color-from-palette($light-theme-accent);
   $warn: mat.get-color-from-palette($light-theme-warn);
@@ -21,7 +21,7 @@
 }
 
 .dark-theme {
-  @include mat.all-component-themes($dark-theme);
+  @include mat.all-component-colors($dark-theme);
   $primary: mat.get-color-from-palette($dark-theme-primary);
   $accent: mat.get-color-from-palette($dark-theme-accent);
   $warn: mat.get-color-from-palette($dark-theme-warn);
