@@ -1,0 +1,36 @@
+<div class="start">
+  <div class="start__toolbar toolbar">
+    <div class="container container--wide">
+      <img class="toolbar__logotype" src="../../../assets/example-logotype.svg" alt="example logotype">
+    </div>
+  </div>
+
+  <div class="start__content content">
+    <div class="container">
+      <h1 class="content__title">Lorem ipsum</h1>
+      <h2 class="content__subtitle">Dolor sit amet</h2>
+      <p class="content__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid dicta ex ipsam
+        molestias
+        mollitia omnis repudiandae totam unde. Ad, vero!</p>
+
+      <div class="content__buttons">
+        <app-button
+          [routerLinkAttribute]="registerPage"
+          appearanceAttribute="flat"
+          label="Załóż konto">
+        </app-button>
+        <app-button
+          [routerLinkAttribute]="loginPage"
+          appearanceAttribute="stroked"
+          label="Zaloguj się">
+        </app-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="start__footer footer">
+    <div class="container container--wide">
+      <p class="footer__text">Copyright &copy; {{ currentYear }} {{ author }}</p>
+    </div>
+  </div>
+</div>

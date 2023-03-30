@@ -1,0 +1,14 @@
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--background);
+}
+
+.auth-wrapper__card {
+  width: calc(100% - 30px);
+  max-width: 400px;
+  margin: 0 auto;
+}
+

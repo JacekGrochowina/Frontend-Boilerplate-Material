@@ -1,0 +1,80 @@
+<ng-container [ngSwitch]="appearanceAttribute">
+  <!-- basic -->
+  <div *ngSwitchCase="'basic'">
+    <button
+      (click)="click($event)"
+      [color]="color"
+      [disabled]="disabledAttribute || (isLoading$ | async) || isLoading"
+      [type]="typeAttribute"
+      [routerLink]="routerLinkAttribute"
+      mat-button
+    >
+      <ng-container [ngTemplateOutlet]="templateLabel"></ng-container>
+    </button>
+  </div>
+
+  <!-- raised -->
+  <div *ngSwitchCase="'raised'">
+    <button
+      (click)="click($event)"
+      [color]="color"
+      [disabled]="disabledAttribute || (isLoading$ | async) || isLoading"
+      [type]="typeAttribute"
+      [routerLink]="routerLinkAttribute"
+      mat-raised-button
+    >
+      <ng-container [ngTemplateOutlet]="templateLabel"></ng-container>
+    </button>
+  </div>
+
+  <!-- stroked -->
+  <div *ngSwitchCase="'stroked'">
+    <button
+      (click)="click($event)"
+      [color]="color"
+      [disabled]="disabledAttribute || (isLoading$ | async) || isLoading"
+      [type]="typeAttribute"
+      [routerLink]="routerLinkAttribute"
+      mat-stroked-button
+    >
+      <ng-container [ngTemplateOutlet]="templateLabel"></ng-container>
+    </button>
+  </div>
+
+  <!-- flat -->
+  <div *ngSwitchCase="'flat'">
+    <button
+      (click)="click($event)"
+      [color]="color"
+      [disabled]="disabledAttribute || (isLoading$ | async) || isLoading"
+      [type]="typeAttribute"
+      [routerLink]="routerLinkAttribute"
+      mat-flat-button
+    >
+      <ng-container [ngTemplateOutlet]="templateLabel"></ng-container>
+    </button>
+  </div>
+
+  <!-- icon -->
+  <div *ngSwitchCase="'icon'">
+    <button
+      (click)="click($event)"
+      [color]="color"
+      [disabled]="disabledAttribute || (isLoading$ | async) || isLoading"
+      [type]="typeAttribute"
+      [routerLink]="routerLinkAttribute"
+      mat-icon-button
+    >
+      <ng-container [ngTemplateOutlet]="templateIcon"></ng-container>
+    </button>
+  </div>
+</ng-container>
+
+<ng-template #templateLabel>
+  <mat-icon *ngIf="icon" [inline]="inline" class="mr-1">{{ icon }}</mat-icon>
+  <span>{{ label }}</span>
+</ng-template>
+
+<ng-template #templateIcon>
+  <mat-icon>{{ icon }}</mat-icon>
+</ng-template>

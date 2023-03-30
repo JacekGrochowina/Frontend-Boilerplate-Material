@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Moment.js - select language
-import { MomentLang } from "./shared/enums/moment-lang.enum";
+import { MomentLang } from "./shared/utils/enums/moment-lang.enum";
 import * as moment from "moment";
 import 'moment/locale/pl';
 

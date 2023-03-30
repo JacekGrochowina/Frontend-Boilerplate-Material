@@ -16,8 +16,16 @@
   --primary: #{$primary};
   --accent: #{$accent};
   --warn: #{$warn};
-  --light: rgb(255, 255, 255);
   --active: rgba(0, 0, 0, 0.04);
+
+  --gray-1: rgb(131, 131, 131);
+  --gray-2: rgb(213, 213, 213);
+
+  --light-1: rgb(255, 255, 255);
+  --light-2: rgb(51, 51, 51);
+
+  // backgrounds
+  --background: rgb(250, 250, 250);
 }
 
 .dark-theme {
@@ -29,6 +37,14 @@
   --primary: #{$primary};
   --accent: #{$accent};
   --warn: #{$warn};
-  --light: rgba(0, 0, 0);
   --active: rgba(255, 255, 255, 0.04);
+
+  --gray-1: rgb(201, 201, 201);
+  --gray-2: rgb(70, 70, 70);
+
+  --light-1: rgba(0, 0, 0);
+  --light-2: rgb(232, 232, 232);
+
+  // backgrounds
+  --background: rgb(48, 48, 48);
 }
