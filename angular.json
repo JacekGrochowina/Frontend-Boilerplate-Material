@@ -18,6 +18,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "moment"
+            ],
             "outputPath": "dist/angular-boilerplate-v2",
             "index": "src/index.html",
             "main": "src/main.ts",
