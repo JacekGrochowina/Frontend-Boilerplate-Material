@@ -1,0 +1,23 @@
+<mat-form-field [appearance]="appearanceAttribute" class="w-100">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    [attr.max]="_maxAttribute"
+    [attr.min]="_minAttribute"
+    [formControl]="control"
+    [required]="required"
+    [type]="typeAttribute"
+    autocomplete="off"
+    matInput
+  />
+  <button
+    (click)="clearValue()"
+    *ngIf="control.value && !control.disabled"
+    color="primary"
+    mat-icon-button
+    matSuffix
+    type="button"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-error *ngIf="error">{{ error }}</mat-error>
+</mat-form-field>
