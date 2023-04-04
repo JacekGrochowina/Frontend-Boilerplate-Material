@@ -11,7 +11,7 @@ enum ValidationMessage {
   providedIn: 'root',
 })
 export class ValidationService {
-  public getErrorMessage(formControl: FormControl) {
+  public getErrorMessage(formControl: FormControl): null | undefined {
     if (formControl && formControl.errors) {
       return first(
         Object.keys(formControl.errors).map((key) =>
@@ -22,7 +22,7 @@ export class ValidationService {
     return null;
   }
 
-  private static getValidationMessage(key: string, validationErrors?: ValidationErrors) {
+  private static getValidationMessage(key: string, validationErrors?: ValidationErrors): never {
     return ValidationMessage[key as keyof object];
   }
 }

@@ -10,6 +10,7 @@ import { ButtonAppearanceType, ButtonType } from './types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
+
   @Input() typeAttribute: ButtonType = 'button';
   @Input() appearanceAttribute: ButtonAppearanceType = 'basic';
   @Input() isLoading$: Observable<boolean> = of(false);
@@ -26,4 +27,5 @@ export class ButtonComponent {
   protected click(mouseEvent: MouseEvent): void {
     this.buttonClickEvent.emit(mouseEvent);
   }
+  
 }

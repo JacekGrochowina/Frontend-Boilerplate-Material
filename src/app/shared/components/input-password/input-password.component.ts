@@ -1,13 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  forwardRef,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit, ViewChild, } from '@angular/core';
 import {
   ControlContainer,
   ControlValueAccessor,
@@ -17,56 +8,40 @@ import {
   NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms';
-import { InputTypeAttribute } from './types/input.type';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { distinctUntilChanged, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { ValidationService } from "../../services/validation.service";
+import { InputPasswordTypeAttribute } from "./types/input.type";
 
 @Component({
-  selector: 'app-input',
+  selector: 'app-input-password',
   providers: [
     {
       multi: true,
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => InputPasswordComponent),
     },
   ],
-  templateUrl: './input.component.html',
+  templateUrl: './input-password.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputComponent implements OnInit, ControlValueAccessor {
+export class InputPasswordComponent implements OnInit, ControlValueAccessor {
 
-  protected required = false;
-  private destroy$ = new Subject<void>();
+  protected isPasswordVisible: boolean = false;
+  protected required: boolean = false;
+  private destroy$: Subject<void> = new Subject<void>();
 
   @ViewChild(FormControlDirective, { static: true }) formControlDirective!: FormControlDirective;
 
   @Input() appearanceAttribute: MatFormFieldAppearance = 'fill';
-  @Input() typeAttribute: InputTypeAttribute = 'text';
   @Input() label!: string | null;
   @Input() formControl!: FormControl;
   @Input() formControlName!: string;
-  @Output() clear = new EventEmitter();
-
-  protected _minAttribute!: number;
-  protected _maxAttribute!: number;
 
   constructor(
     private controlContainer: ControlContainer,
     private validationService: ValidationService
   ) {}
-
-  @Input() set minAttribute(value: number) {
-    if (this.typeAttribute === 'number') {
-      this._minAttribute = value;
-    }
-  }
-
-  @Input() set maxAttribute(value: number) {
-    if (this.typeAttribute === 'number') {
-      this._maxAttribute = value;
-    }
-  }
 
   protected get control(): FormControl {
     return this.formControl || this.controlContainer.control?.get(this.formControlName);
@@ -74,6 +49,18 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
   protected get error(): null | undefined {
     return this.validationService.getErrorMessage(this.control);
+  }
+
+  protected get visibilityIcon(): string {
+    return this.isPasswordVisible ? 'visibility' : 'visibility_off';
+  }
+
+  protected get inputType(): InputPasswordTypeAttribute {
+    return this.isPasswordVisible ? 'text' : 'password';
+  }
+
+  protected changeVisibility(): void {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 
   public ngOnInit(): void {
@@ -99,11 +86,6 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     this.formControlDirective.valueAccessor?.writeValue(value);
   }
 
-  protected clearValue(): void {
-    this.control.reset();
-    this.clear.emit();
-  }
-
   private handleControlStatusChanges(): Observable<FormControlStatus> {
     return this.control.statusChanges.pipe(
       distinctUntilChanged(),
@@ -112,5 +94,5 @@ export class InputComponent implements OnInit, ControlValueAccessor {
       })
     );
   }
-  
+
 }

@@ -4,6 +4,7 @@ import { LoginFormComponent } from './login-form.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { InputModule } from "../../../../shared/components/input";
 import { ButtonModule } from "../../../../shared/components/button";
+import { InputPasswordModule } from "../../../../shared/components/input-password";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ButtonModule } from "../../../../shared/components/button";
     FormsModule,
     ReactiveFormsModule,
     InputModule,
-    ButtonModule
+    ButtonModule,
+    InputPasswordModule
   ]
 })
 export class LoginFormModule {}
