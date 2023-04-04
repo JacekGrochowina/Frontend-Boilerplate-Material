@@ -112,5 +112,4 @@ export class InputComponent implements OnInit, ControlValueAccessor {
       })
     );
   }
-  
 }

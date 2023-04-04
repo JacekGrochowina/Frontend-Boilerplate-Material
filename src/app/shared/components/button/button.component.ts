@@ -27,5 +27,4 @@ export class ButtonComponent {
   protected click(mouseEvent: MouseEvent): void {
     this.buttonClickEvent.emit(mouseEvent);
   }
-  
 }

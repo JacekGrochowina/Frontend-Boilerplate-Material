@@ -5,6 +5,7 @@ import { first } from "lodash";
 enum ValidationMessage {
   email = 'Nieprawidłowy format adresu email',
   required = 'To pole jest wymagane',
+  matchingValue = 'Nie pasująca wartość',
 }
 
 @Injectable({

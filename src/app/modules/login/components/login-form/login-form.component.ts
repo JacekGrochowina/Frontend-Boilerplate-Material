@@ -7,6 +7,7 @@ import { FormBuilder, FormControl, Validators } from "@angular/forms";
   templateUrl: './login-form.component.html',
 })
 export class LoginFormComponent {
+
   protected formGroup!: LoginFormGroupType;
   @Output() submitted = new EventEmitter<void>();
 
