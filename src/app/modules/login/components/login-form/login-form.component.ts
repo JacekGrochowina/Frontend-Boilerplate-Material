@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { LoginFormControlType, LoginFormGroupType } from "./types";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { Routing } from "../../../../shared/utils/enums/routing.enum";
 
 @Component({
   selector: 'app-login-form',
@@ -24,6 +25,10 @@ export class LoginFormComponent {
 
   public getFormGroup(): LoginFormGroupType {
     return this.formGroup;
+  }
+
+  protected get registerPage() {
+    return `./../${Routing.register}`;
   }
 
   protected get email(): FormControl<string | null> {

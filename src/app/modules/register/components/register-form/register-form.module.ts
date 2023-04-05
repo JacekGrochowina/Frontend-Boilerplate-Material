@@ -5,6 +5,7 @@ import { InputModule } from "../../../../shared/components/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { InputPasswordModule } from "../../../../shared/components/input-password";
 import { ButtonModule } from "../../../../shared/components/button";
+import { RouterLink } from "@angular/router";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ButtonModule } from "../../../../shared/components/button";
     ReactiveFormsModule,
     InputModule,
     ButtonModule,
-    InputPasswordModule
+    InputPasswordModule,
+    RouterLink
   ]
 })
 export class RegisterFormModule {}

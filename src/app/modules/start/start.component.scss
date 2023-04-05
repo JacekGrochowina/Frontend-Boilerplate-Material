@@ -1,7 +1,7 @@
 .start {
   display: flex;
   flex-direction: column;
-  background-color: var(--background);
+  background-color: var(--light-background-1);
   min-height: 100vh;
 }
 
@@ -27,12 +27,12 @@
 .content__subtitle {
   font-size: 40px;
   margin-bottom: 20px;
-  color: var(--light-2);
+  color: var(--clear-text-2);
 }
 
 .content__desc {
   margin-bottom: 30px;
-  color: var(--light-2);
+  color: var(--clear-text-1);
 }
 
 .content__buttons {
@@ -42,14 +42,14 @@
 }
 
 .start__footer {
-  border-top: 1px solid var(--gray-2);
+  border-top: 1px solid var(--border-1);
   padding: 15px;
 }
 
 .footer__text {
   font-size: 13px;
   margin: 0;
-  color: var(--gray-1);
+  color: var(--light-text-1);
 }
 
 .container {

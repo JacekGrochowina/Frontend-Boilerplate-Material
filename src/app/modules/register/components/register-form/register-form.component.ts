@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { RegisterFormControlType, RegisterFormGroupType } from "./types/register-form.type";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { CustomValidators } from "../../../../shared/utils/validators/custom-validators";
+import { Routing } from "../../../../shared/utils/enums/routing.enum";
 
 @Component({
   selector: 'app-register-form',
@@ -40,6 +41,10 @@ export class RegisterFormComponent {
 
   public getFormGroup(): RegisterFormGroupType {
     return this.formGroup;
+  }
+
+  protected get loginPage() {
+    return `./../${Routing.login}`;
   }
 
   protected get name(): FormControl<string | null> {
