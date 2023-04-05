@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-auth-wrapper',
   templateUrl: './auth-wrapper.component.html',
-  styleUrls: ['./auth-wrapper.component.scss']
+  styleUrls: ['./auth-wrapper.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthWrapperComponent {}

@@ -1,0 +1,13 @@
+<mat-drawer-container class="sidenav-wrapper" autosize>
+  <mat-drawer #drawer class="sidenav-drawer" mode="side">
+    <p>Auto-resizing sidenav</p>
+  </mat-drawer>
+
+  <div class="sidenav-content content">
+    <app-toolbar [drawerRef]="drawer"></app-toolbar>
+
+    <main class="content__main">
+      <ng-content></ng-content>
+    </main>
+  </div>
+</mat-drawer-container>
