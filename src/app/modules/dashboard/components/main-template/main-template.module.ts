@@ -1,23 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SidenavWrapperComponent } from './sidenav-wrapper.component';
+import { MainTemplateComponent } from './main-template.component';
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatButtonModule } from "@angular/material/button";
 import { ToolbarModule } from "../toolbar";
+import { SidenavContentModule } from "../sidenav-content";
 
 
 @NgModule({
   declarations: [
-    SidenavWrapperComponent
+    MainTemplateComponent
   ],
   exports: [
-    SidenavWrapperComponent
+    MainTemplateComponent
   ],
   imports: [
     CommonModule,
     MatSidenavModule,
     MatButtonModule,
-    ToolbarModule
+    ToolbarModule,
+    SidenavContentModule
   ]
 })
-export class SidenavWrapperModule {}
+export class MainTemplateModule {}

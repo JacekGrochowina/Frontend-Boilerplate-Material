@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from "./dashboard-routing.module";
-import { SidenavWrapperModule } from "./components/sidenav-wrapper";
+import { MainTemplateModule } from "./components/main-template";
 
 @NgModule({
   declarations: [
@@ -11,7 +11,7 @@ import { SidenavWrapperModule } from "./components/sidenav-wrapper";
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    SidenavWrapperModule,
+    MainTemplateModule,
   ]
 })
 export class DashboardModule {}
