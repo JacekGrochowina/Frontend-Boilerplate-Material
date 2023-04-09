@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SidenavItemType } from "../../types/sidenav-item.type";
-import { DashboardRouting } from "../../../../utils/dashboard-routing.enum";
+import { DashboardRouting } from "../../../../utils";
+import { SidenavItemType } from "../../types";
 
 @Component({
   selector: 'app-nav-list',
@@ -9,7 +9,7 @@ import { DashboardRouting } from "../../../../utils/dashboard-routing.enum";
 })
 export class NavListComponent {
 
-  protected sidenavList: SidenavItemType[] = [
+  protected navList: SidenavItemType[] = [
     {
       name: 'Domowa',
       icon: 'home',

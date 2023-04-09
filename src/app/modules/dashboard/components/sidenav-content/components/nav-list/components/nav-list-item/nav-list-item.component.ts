@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { SidenavItemType } from "../../../../types/sidenav-item.type";
-import { DashboardRouting } from "../../../../../../utils/dashboard-routing.enum";
+import { SidenavItemType } from "../../../../types";
+import { DashboardRouting } from "../../../../../../utils";
 
 @Component({
   selector: 'app-nav-list-item',
@@ -11,15 +11,15 @@ export class NavListItemComponent {
 
   @Input() sidenavItem!: SidenavItemType;
 
-  protected get name(): string {
+  protected get name(): SidenavItemType['name'] {
     return this.sidenavItem.name;
   }
 
-  protected get icon(): string {
+  protected get icon(): SidenavItemType['icon'] {
     return this.sidenavItem.icon;
   }
 
-  protected get path(): DashboardRouting {
+  protected get path(): SidenavItemType['path'] {
     return this.sidenavItem.path;
   }
 

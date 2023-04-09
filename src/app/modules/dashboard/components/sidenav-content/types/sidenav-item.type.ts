@@ -1,4 +1,4 @@
-import { DashboardRouting } from "../../../utils/dashboard-routing.enum";
+import { DashboardRouting } from "../../../utils";
 
 export type SidenavItemType = {
   name: string;

@@ -1,25 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ToolbarComponent } from './toolbar.component';
-import { MatToolbarModule } from "@angular/material/toolbar";
+import { ContextMenuComponent } from './context-menu.component';
 import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from "@angular/material/menu";
 import { MatButtonModule } from "@angular/material/button";
-import { ContextMenuModule } from "./components/context-menu";
 
 
 @NgModule({
   declarations: [
-    ToolbarComponent
+    ContextMenuComponent
   ],
   exports: [
-    ToolbarComponent
+    ContextMenuComponent
   ],
   imports: [
     CommonModule,
-    MatToolbarModule,
     MatIconModule,
+    MatMenuModule,
     MatButtonModule,
-    ContextMenuModule
   ]
 })
-export class ToolbarModule {}
+export class ContextMenuModule {}
