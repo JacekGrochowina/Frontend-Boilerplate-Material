@@ -1,0 +1,41 @@
+.list__item {
+  user-select: none;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    background-color: var(--primary);
+    transition: width 0.2s;
+  }
+
+  &.is-active {
+    &::after {
+      width: 7px;
+    }
+
+    .item__link {
+      transform: translateX(7px);
+    }
+  }
+}
+
+.item__link {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  transition: transform 0.2s;
+}
+
+.item__icon {
+  color: var(--primary);
+  margin-right: 1rem;
+}
+
+.item__text {
+  color: var(--on-surface);
+}

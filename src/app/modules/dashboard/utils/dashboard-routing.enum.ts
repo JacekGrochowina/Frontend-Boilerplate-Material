@@ -1,3 +1,4 @@
 export enum DashboardRouting {
-  home = '',
+  home = 'start',
+  settings = 'settings',
 }

@@ -1,10 +1,11 @@
 <mat-list-item
+  [routerLink]="path"
   [routerLinkActiveOptions]="getIsHomePage(sidenavItem) ? { exact: true } : { exact: false }"
-  routerLinkActive="active"
+  routerLinkActive="is-active"
   class="list__item item"
 >
-  <a [routerLink]="path" class="item__link">
+  <div class="item__link">
     <mat-icon class="item__icon">{{ icon }}</mat-icon>
     <span class="item__text">{{ name }}</span>
-  </a>
+  </div>
 </mat-list-item>

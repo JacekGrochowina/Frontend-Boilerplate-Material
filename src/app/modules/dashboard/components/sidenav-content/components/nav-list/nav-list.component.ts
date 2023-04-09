@@ -15,6 +15,11 @@ export class NavListComponent {
       icon: 'home',
       path: DashboardRouting.home,
     },
+    {
+      name: 'Ustawienia',
+      icon: 'settings',
+      path: DashboardRouting.settings,
+    },
   ];
 
 }

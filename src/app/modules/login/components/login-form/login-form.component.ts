@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { LoginFormControlType, LoginFormGroupType } from "./types";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
-import { Routing } from "../../../../shared/utils/enums/routing.enum";
+import { Routing } from "../../../../shared/utils/enums";
 
 @Component({
   selector: 'app-login-form',

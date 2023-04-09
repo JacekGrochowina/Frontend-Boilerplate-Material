@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { RegisterFormControlType, RegisterFormGroupType } from "./types/register-form.type";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
-import { CustomValidators } from "../../../../shared/utils/validators/custom-validators";
-import { Routing } from "../../../../shared/utils/enums/routing.enum";
+import { Routing } from "../../../../shared/utils/enums";
+import { CustomValidators } from "../../../../shared/utils/validators";
 
 @Component({
   selector: 'app-register-form',
