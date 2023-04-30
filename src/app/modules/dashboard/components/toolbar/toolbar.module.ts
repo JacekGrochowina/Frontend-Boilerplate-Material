@@ -5,6 +5,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { ContextMenuModule } from "./components/context-menu";
+import { UserDetailsModule } from "./components/user-details";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ContextMenuModule } from "./components/context-menu";
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    ContextMenuModule
+    ContextMenuModule,
+    UserDetailsModule
   ]
 })
 export class ToolbarModule {}

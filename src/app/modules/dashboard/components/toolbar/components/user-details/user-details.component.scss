@@ -1,0 +1,35 @@
+.user-details {
+  display: flex;
+  align-items: center;
+}
+
+.avatar__image {
+  font-size: 16px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-container);
+  color: var(--on-secondary-container);
+  border-radius: 5px;
+}
+
+.user-details__content {
+  display: flex;
+  align-items: center;
+}
+
+.content__text {
+  color: var(--on-primary);
+  font-size: 16px;
+  line-height: 1.2;
+  margin: 0 1rem;
+}
+
+.text__subtext {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 0.8;
+}
