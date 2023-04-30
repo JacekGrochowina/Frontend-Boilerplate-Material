@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from "./home-routing.module";
 import { ContentTemplateModule } from "../../components/content-template";
+import { HeaderPageModule } from "../../../../shared/components/header-page";
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { ContentTemplateModule } from "../../components/content-template";
     CommonModule,
     HomeRoutingModule,
     ContentTemplateModule,
+    HeaderPageModule,
   ]
 })
 export class HomeModule {}

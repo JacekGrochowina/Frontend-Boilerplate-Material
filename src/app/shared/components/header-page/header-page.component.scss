@@ -1,0 +1,21 @@
+@import "src/styles/mixins";
+
+.header-page__icon {
+  margin-right: 1rem;
+}
+
+.header-page__icon .mat-icon {
+  @include material-icon-size(30px);
+}
+
+.header-page__title,
+.header-page__subtitle {
+  margin: 0;
+}
+
+.header-page__subtitle {
+  color: var(--secondary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.3;
+}

@@ -1,0 +1,14 @@
+<div class="header-page">
+  <div class="d-flex align-items-center p-3">
+    <div *ngIf="icon" class="header-page__icon">
+      <mat-icon color="primary">{{ icon }}</mat-icon>
+    </div>
+
+    <div class="header-page__content">
+      <h1 class="header-page__title">{{ title }}</h1>
+      <h2 *ngIf="subtitle" class="header-page__subtitle">{{ subtitle }}</h2>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+</div>
