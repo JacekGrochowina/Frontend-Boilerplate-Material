@@ -5,15 +5,15 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Moment.js - select language
-import { MomentLang } from "./shared/utils/enums/moment-lang.enum";
-import * as moment from "moment";
+import { MomentLang } from './shared/utils/enums/moment-lang.enum';
+import * as moment from 'moment';
 import 'moment/locale/pl';
 
 moment.locale(MomentLang.polish);
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

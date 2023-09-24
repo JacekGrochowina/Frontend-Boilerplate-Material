@@ -1,7 +1,13 @@
-<div class="header-page">
+<div class="header-page mb-3">
   <div class="d-flex align-items-center p-3">
-    <div *ngIf="icon" class="header-page__icon">
+    <div *ngIf="isIconVisible" class="header-page__icon">
       <mat-icon color="primary">{{ icon }}</mat-icon>
+    </div>
+
+    <div *ngIf="hasOptionBackToParent" class="header-page__btn">
+      <button mat-icon-button color="primary" [routerLink]="'../'">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
     </div>
 
     <div class="header-page__content">

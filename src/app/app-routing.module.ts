@@ -1,27 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Routing } from "./shared/utils/enums";
+import { AppRouting } from './utils';
 
 const routes: Routes = [
   {
-    path: Routing.start,
+    path: AppRouting.start,
     loadChildren: () =>
-      import('./modules/start/start.module').then((m) => m.StartModule),
+      import('./pages/start/start.module').then((m) => m.StartModule),
   },
   {
-    path: Routing.login,
+    path: AppRouting.login,
     loadChildren: () =>
-      import('./modules/login/login.module').then((m) => m.LoginModule),
+      import('./pages/login/login.module').then((m) => m.LoginModule),
   },
   {
-    path: Routing.register,
+    path: AppRouting.register,
     loadChildren: () =>
-      import('./modules/register/register.module').then((m) => m.RegisterModule),
+      import('./pages/register/register.module').then((m) => m.RegisterModule),
   },
   {
-    path: Routing.dashboard,
+    path: AppRouting.dashboard,
     loadChildren: () =>
-      import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
+      import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
 ];
 

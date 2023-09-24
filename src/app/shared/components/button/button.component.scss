@@ -1,0 +1,25 @@
+@import "src/styles/mixins";
+
+.mdc-button {
+  overflow: hidden !important;
+}
+
+.icon {
+  @include material-icon-size(18px);
+}
+
+.spinner-overlay {
+  position: absolute;
+  top: -8px;
+  left: -16px;
+  right: -16px;
+  bottom: -8px;
+  background: rgba(220, 220, 220, 0.8);
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

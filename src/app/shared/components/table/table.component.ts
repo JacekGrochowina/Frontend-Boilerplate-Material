@@ -1,0 +1,69 @@
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { combineLatest, Observable, Subject } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { map, takeUntil } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class TableComponent implements OnInit, OnDestroy {
+
+  @Input() items$!: Observable<any[]>;
+  @Input() loading$!: Observable<boolean>;
+  @Input() success$!: Observable<boolean>;
+  @Input() error$!: Observable<HttpErrorResponse | null>;
+
+  protected isEmpty$!: Observable<boolean>;
+  protected isTableErrorVisible$!: Observable<boolean>;
+  protected isTableEmptyVisible$!: Observable<boolean>;
+  protected isTableContentVisible$!: Observable<boolean>;
+
+  private unsubscribe$ = new Subject<boolean>();
+
+  public ngOnInit(): void {
+    this.isEmpty$ = this.getIsEmpty();
+    this.isTableErrorVisible$ = this.getIsTableErrorVisible();
+    this.isTableEmptyVisible$ = this.getIsTableEmptyVisible();
+    this.isTableContentVisible$ = this.getIsTableContentVisible();
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.unsubscribe();
+  }
+
+  private getIsEmpty(): Observable<boolean> {
+    return this.items$.pipe(
+      takeUntil(this.unsubscribe$),
+      map((items) => items.length === 0)
+    );
+  }
+
+  private getIsTableErrorVisible(): Observable<boolean> {
+    return combineLatest([this.loading$, this.error$])
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        map(([loading, error]) => !loading && !!error)
+      );
+  }
+
+  private getIsTableEmptyVisible(): Observable<boolean> {
+    return combineLatest([this.loading$, this.error$, this.isEmpty$])
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        map(([loading, error, isEmpty]) => !loading && !error && isEmpty)
+      );
+  }
+
+  private getIsTableContentVisible(): Observable<boolean> {
+    return combineLatest([this.loading$, this.isEmpty$])
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        map(([loading, isEmpty]) => !loading && !isEmpty)
+      );
+  }
+
+}

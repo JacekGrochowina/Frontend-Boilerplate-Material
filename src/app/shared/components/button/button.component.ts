@@ -16,11 +16,13 @@ export class ButtonComponent {
   @Input() isLoading$: Observable<boolean> = of(false);
   @Input() isLoading: boolean = false;
   @Input() disabledAttribute: boolean = false;
+  @Input() disabledAttribute$: Observable<boolean> = of(false);
   @Input() label!: string;
   @Input() color: ThemePalette = 'primary';
   @Input() icon?: string;
   @Input() inline: boolean = true;
-  @Input() routerLinkAttribute?: string;
+  @Input() routerLinkAttribute?: any[] | string | null | undefined;
+  @Input() class?: string;
 
   @Output() buttonClickEvent = new EventEmitter<MouseEvent>();
 

@@ -1,0 +1,106 @@
+<app-header-page
+  title="Tabela - podstawowa"
+  subtitle="Przykładowe użycie podstawowego komponentu tabeli"
+  [hasOptionBackToParent]="true"
+></app-header-page>
+
+<div class="d-flex mb-2">
+  <app-button
+    (buttonClickEvent)="onSuccessClick()"
+    [disabledAttribute$]="dataMockListLoading$"
+    appearanceAttribute="stroked"
+    label="Success"
+    color="primary"
+    class="me-1"
+  />
+
+  <app-button
+    (buttonClickEvent)="onFailClick()"
+    [disabledAttribute$]="dataMockListLoading$"
+    appearanceAttribute="stroked"
+    label="Fail"
+    color="primary"
+    class="me-1"
+  />
+
+  <app-button
+    (buttonClickEvent)="onEmptyClick()"
+    [disabledAttribute$]="dataMockListLoading$"
+    appearanceAttribute="stroked"
+    label="Empty"
+    color="primary"
+    class="me-1"
+  />
+</div>
+
+<!--<p>loading: {{ dataMockListLoading$ | async }}</p>-->
+<!--<p>success: {{ dataMockListSuccess$ | async }}</p>-->
+<!--<p>error: {{ dataMockListError$ | async | json }}</p>-->
+<!--<p>list: {{ dataMockListItems$ | async | json }}</p>-->
+
+<!------------------------------------>
+<!-- 1. First way -------------------->
+<!-- Write every single column ------->
+<!------------------------------------>
+
+<app-table
+  [items$]="dataMockListItems$"
+  [loading$]="dataMockListLoading$"
+  [success$]="dataMockListSuccess$"
+  [error$]="dataMockListError$"
+>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    *ngIf="(dataMockListItems$ | async) as dataSource"
+    class="w-100"
+  >
+    <!-- Username Column -->
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+      <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <!-- Vehicle Column -->
+    <ng-container matColumnDef="vehicle">
+      <th mat-header-cell *matHeaderCellDef>Pojazd</th>
+      <td mat-cell *matCellDef="let element">{{ element.vehicle }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</app-table>
+
+<!------------------------------------>
+<!-- 2. Second way ------------------->
+<!-- Display basic columns in loop --->
+<!------------------------------------>
+
+<!--<app-table-->
+<!--  [items$]="dataMockListItems$"-->
+<!--  [loading$]="dataMockListLoading$"-->
+<!--  [success$]="dataMockListSuccess$"-->
+<!--  [error$]="dataMockListError$"-->
+<!--&gt;-->
+<!--  <table-->
+<!--    mat-table-->
+<!--    [dataSource]="dataSource"-->
+<!--    *ngIf="(dataMockListItems$ | async) as dataSource"-->
+<!--    class="w-100"-->
+<!--  >-->
+<!--    <ng-container matColumnDef="{{ column }}" *ngFor="let column of displayedColumns">-->
+<!--      <th mat-header-cell *matHeaderCellDef> {{ column }} </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{ element[column] }} </td>-->
+<!--    </ng-container>-->
+
+<!--    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+<!--  </table>-->
+<!--</app-table>-->

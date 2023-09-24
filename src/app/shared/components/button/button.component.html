@@ -4,12 +4,13 @@
     <button
       (click)="click($event)"
       [color]="color"
-      [disabled]="disabledAttribute || (isLoading$ | async) || isLoading"
+      [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
       [type]="typeAttribute"
       [routerLink]="routerLinkAttribute"
+      [class]="class"
       mat-button
     >
-      <ng-container [ngTemplateOutlet]="templateLabel"></ng-container>
+      <ng-container [ngTemplateOutlet]="templateLabel"/>
     </button>
   </div>
 
@@ -18,12 +19,13 @@
     <button
       (click)="click($event)"
       [color]="color"
-      [disabled]="disabledAttribute || (isLoading$ | async) || isLoading"
+      [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
       [type]="typeAttribute"
       [routerLink]="routerLinkAttribute"
+      [class]="class"
       mat-raised-button
     >
-      <ng-container [ngTemplateOutlet]="templateLabel"></ng-container>
+      <ng-container [ngTemplateOutlet]="templateLabel"/>
     </button>
   </div>
 
@@ -32,12 +34,13 @@
     <button
       (click)="click($event)"
       [color]="color"
-      [disabled]="disabledAttribute || (isLoading$ | async) || isLoading"
+      [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
       [type]="typeAttribute"
       [routerLink]="routerLinkAttribute"
+      [class]="class"
       mat-stroked-button
     >
-      <ng-container [ngTemplateOutlet]="templateLabel"></ng-container>
+      <ng-container [ngTemplateOutlet]="templateLabel"/>
     </button>
   </div>
 
@@ -46,12 +49,13 @@
     <button
       (click)="click($event)"
       [color]="color"
-      [disabled]="disabledAttribute || (isLoading$ | async) || isLoading"
+      [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
       [type]="typeAttribute"
       [routerLink]="routerLinkAttribute"
+      [class]="class"
       mat-flat-button
     >
-      <ng-container [ngTemplateOutlet]="templateLabel"></ng-container>
+      <ng-container [ngTemplateOutlet]="templateLabel"/>
     </button>
   </div>
 
@@ -60,21 +64,45 @@
     <button
       (click)="click($event)"
       [color]="color"
-      [disabled]="disabledAttribute || (isLoading$ | async) || isLoading"
+      [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
       [type]="typeAttribute"
       [routerLink]="routerLinkAttribute"
+      [class]="class"
       mat-icon-button
     >
-      <ng-container [ngTemplateOutlet]="templateIcon"></ng-container>
+      <ng-container [ngTemplateOutlet]="templateIcon"/>
     </button>
   </div>
 </ng-container>
 
 <ng-template #templateLabel>
-  <mat-icon *ngIf="icon" [inline]="inline" class="mr-1">{{ icon }}</mat-icon>
-  <span>{{ label }}</span>
+  <div class="d-flex align-items-center">
+    <ng-container
+      *ngIf="(isLoading$ | async) || isLoading"
+      [ngTemplateOutlet]="spinner"
+    />
+
+    <mat-icon
+      *ngIf="icon"
+      [inline]="inline"
+      class="icon me-2"
+    >
+      {{ icon }}
+    </mat-icon>
+    <span>{{ label }}</span>
+  </div>
 </ng-template>
 
 <ng-template #templateIcon>
   <mat-icon>{{ icon }}</mat-icon>
+</ng-template>
+
+<ng-template #spinner>
+  <div class="spinner-overlay">
+    <mat-spinner
+      [diameter]="19"
+      [color]="color"
+      class="spinner me-2"
+    />
+  </div>
 </ng-template>
