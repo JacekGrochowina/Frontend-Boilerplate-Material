@@ -5,7 +5,7 @@
 
 //$light-theme-primary: mat.define-palette(md.$navy-palette, 400); // example of using custom palette
 $light-theme-primary: mat.define-palette(mat.$indigo-palette, 400);
-$light-theme-accent: mat.define-palette(mat.$orange-palette, 700);
+$light-theme-accent: mat.define-palette(mat.$orange-palette, 900);
 $light-theme-warn: mat.define-palette(mat.$red-palette, 600);
 
 $light-theme: mat.define-light-theme((

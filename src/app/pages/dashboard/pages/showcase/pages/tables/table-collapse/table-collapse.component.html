@@ -1,0 +1,122 @@
+<app-header-page
+  title="Tabela - rozwijane wiersze"
+  subtitle="Przykładowe użycie komponentu tabeli z rozwijanymi wierszami"
+  [hasOptionBackToParent]="true"
+></app-header-page>
+
+<div class="d-flex mb-2">
+  <app-button
+    (buttonClickEvent)="onSuccessClick()"
+    [disabledAttribute$]="dataMockListLoading$"
+    appearanceAttribute="stroked"
+    label="Success"
+    color="primary"
+    class="me-1"
+  />
+
+  <app-button
+    (buttonClickEvent)="onFailClick()"
+    [disabledAttribute$]="dataMockListLoading$"
+    appearanceAttribute="stroked"
+    label="Fail"
+    color="primary"
+    class="me-1"
+  />
+
+  <app-button
+    (buttonClickEvent)="onEmptyClick()"
+    [disabledAttribute$]="dataMockListLoading$"
+    appearanceAttribute="stroked"
+    label="Empty"
+    color="primary"
+    class="me-1"
+  />
+</div>
+
+<!--<p>loading: {{ dataMockListLoading$ | async }}</p>-->
+<!--<p>success: {{ dataMockListSuccess$ | async }}</p>-->
+<!--<p>error: {{ dataMockListError$ | async | json }}</p>-->
+<!--<p>list: {{ dataMockListItems$ | async | json }}</p>-->
+
+<app-table
+  [items$]="dataMockListItems$"
+  [loading$]="dataMockListLoading$"
+  [success$]="dataMockListSuccess$"
+  [error$]="dataMockListError$"
+>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    *ngIf="(dataMockListItems$ | async) as dataSource"
+    multiTemplateDataRows
+    class="w-100"
+  >
+    <!-- 1. First way -------------------->
+    <!-- Write every single column ------->
+
+    <!-- Username Column -->
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+      <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <!-- Vehicle Column -->
+    <ng-container matColumnDef="vehicle">
+      <th mat-header-cell *matHeaderCellDef>Pojazd</th>
+      <td mat-cell *matCellDef="let element">{{ element.vehicle }}</td>
+    </ng-container>
+
+    <!-- 2. Second way ------------------->
+    <!-- Display basic columns in loop --->
+    <!--    <ng-container matColumnDef="{{ column }}" *ngFor="let column of displayedColumns">-->
+    <!--      <th mat-header-cell *matHeaderCellDef> {{ column }} </th>-->
+    <!--      <td mat-cell *matCellDef="let element"> {{ element[column] }} </td>-->
+    <!--    </ng-container>-->
+
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="expand row"
+                (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+          <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+          <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumnsWithExpand.length">
+        <div class="element-detail"
+             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="element-detail__photo photo">
+            <img class="photo__img" [src]="element.avatar" [alt]="element.username">
+          </div>
+
+          <div class="element-detail__content content">
+            <dl>
+              <dt>Data rejestracji</dt>
+              <dd>{{ element.registeredAt.getFullYear() }}</dd>
+              <dt>Dzień urodzin</dt>
+              <dd>{{ element.birthdate.getFullYear() }}</dd>
+            </dl>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsWithExpand"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumnsWithExpand;"
+        class="element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+</app-table>

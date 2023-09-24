@@ -1,0 +1,9 @@
+<app-table-loading *ngIf="loading$ | async"></app-table-loading>
+
+<app-table-error *ngIf="isTableErrorVisible$ | async" [error$]="error$"></app-table-error>
+
+<app-table-empty *ngIf="isTableEmptyVisible$ | async"></app-table-empty>
+
+<app-table-content *ngIf="isTableContentVisible$ | async">
+  <ng-content></ng-content>
+</app-table-content>

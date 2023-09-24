@@ -8,7 +8,13 @@ import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [InputComponent],
-  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule
+  ],
   exports: [InputComponent],
 })
 export class InputModule {}

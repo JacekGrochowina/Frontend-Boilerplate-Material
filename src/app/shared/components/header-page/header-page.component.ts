@@ -8,7 +8,13 @@ import { Component, Input } from '@angular/core';
 export class HeaderPageComponent {
 
   @Input() title!: string;
+  @Input() hasOptionBackToParent: boolean = false;
   @Input() subtitle?: string;
   @Input() icon?: string;
+
+  protected get isIconVisible(): boolean {
+    const isIcon = !!this.icon;
+    return isIcon && !this.hasOptionBackToParent;
+  }
 
 }
