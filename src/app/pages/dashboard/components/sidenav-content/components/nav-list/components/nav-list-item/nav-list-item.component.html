@@ -1,5 +1,6 @@
+@if (isVisibleOnProduction) {
 <mat-list-item
-  *ngIf="isVisibleOnProduction"
+ 
   [routerLink]="path"
   [routerLinkActiveOptions]="getIsHomePage(sidenavItem) ? { exact: true } : { exact: false }"
   routerLinkActive="is-active"
@@ -10,3 +11,4 @@
     <span class="item__text">{{ name }}</span>
   </div>
 </mat-list-item>
+}

@@ -1,9 +1,17 @@
-<app-table-loading *ngIf="loading$ | async"></app-table-loading>
+@if (loading$ | async) {
+<app-table-loading></app-table-loading>
+}
 
-<app-table-error *ngIf="isTableErrorVisible$ | async" [error$]="error$"></app-table-error>
+@if (isTableErrorVisible$ | async) {
+<app-table-error [error$]="error$"></app-table-error>
+}
 
-<app-table-empty *ngIf="isTableEmptyVisible$ | async"></app-table-empty>
+@if (isTableEmptyVisible$ | async) {
+<app-table-empty></app-table-empty>
+}
 
-<app-table-content *ngIf="isTableContentVisible$ | async">
+@if (isTableContentVisible$ | async) {
+<app-table-content>
   <ng-content></ng-content>
 </app-table-content>
+}
