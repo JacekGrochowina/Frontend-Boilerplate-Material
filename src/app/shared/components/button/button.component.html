@@ -1,6 +1,8 @@
-<ng-container [ngSwitch]="appearanceAttribute">
+
+@switch (appearanceAttribute) {
   <!-- basic -->
-  <div *ngSwitchCase="'basic'">
+  @case ('basic') {
+  <div>
     <button
       (click)="click($event)"
       [color]="color"
@@ -13,9 +15,11 @@
       <ng-container [ngTemplateOutlet]="templateLabel"/>
     </button>
   </div>
+}
 
   <!-- raised -->
-  <div *ngSwitchCase="'raised'">
+  @case ('raised') {
+  <div>
     <button
       (click)="click($event)"
       [color]="color"
@@ -28,9 +32,11 @@
       <ng-container [ngTemplateOutlet]="templateLabel"/>
     </button>
   </div>
+}
 
   <!-- stroked -->
-  <div *ngSwitchCase="'stroked'">
+  @case ('stroked') {
+  <div>
     <button
       (click)="click($event)"
       [color]="color"
@@ -43,9 +49,11 @@
       <ng-container [ngTemplateOutlet]="templateLabel"/>
     </button>
   </div>
+}
 
   <!-- flat -->
-  <div *ngSwitchCase="'flat'">
+  @case ('flat') {
+  <div>
     <button
       (click)="click($event)"
       [color]="color"
@@ -58,9 +66,11 @@
       <ng-container [ngTemplateOutlet]="templateLabel"/>
     </button>
   </div>
+}
 
   <!-- icon -->
-  <div *ngSwitchCase="'icon'">
+  @case ('icon') {
+  <div>
     <button
       (click)="click($event)"
       [color]="color"
@@ -73,22 +83,28 @@
       <ng-container [ngTemplateOutlet]="templateIcon"/>
     </button>
   </div>
-</ng-container>
+}
+}
+
 
 <ng-template #templateLabel>
   <div class="d-flex align-items-center">
-    <ng-container
-      *ngIf="(isLoading$ | async) || isLoading"
+    @if ((isLoading$ | async) || isLoading) {
+<ng-container
+     
       [ngTemplateOutlet]="spinner"
     />
+}
 
-    <mat-icon
-      *ngIf="icon"
+    @if (icon) {
+<mat-icon
+     
       [inline]="inline"
       class="icon me-2"
     >
       {{ icon }}
     </mat-icon>
+}
     <span>{{ label }}</span>
   </div>
 </ng-template>

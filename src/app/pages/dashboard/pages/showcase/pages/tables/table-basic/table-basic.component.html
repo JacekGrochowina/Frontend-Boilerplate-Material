@@ -49,10 +49,11 @@
   [success$]="dataMockListSuccess$"
   [error$]="dataMockListError$"
 >
-  <table
+  @if ((dataMockListItems$ | async); as dataSource) {
+<table
     mat-table
     [dataSource]="dataSource"
-    *ngIf="(dataMockListItems$ | async) as dataSource"
+   
     class="w-100"
   >
     <!-- Username Column -->
@@ -76,6 +77,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+}
 </app-table>
 
 <!------------------------------------>

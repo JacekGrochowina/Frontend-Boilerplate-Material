@@ -9,9 +9,10 @@
     autocomplete="off"
     matInput
   />
-  <button
+  @if (control.value && !control.disabled) {
+<button
     (click)="clearValue()"
-    *ngIf="control.value && !control.disabled"
+   
     color="primary"
     mat-icon-button
     matSuffix
@@ -19,5 +20,8 @@
   >
     <mat-icon>close</mat-icon>
   </button>
-  <mat-error *ngIf="error">{{ error }}</mat-error>
+}
+  @if (error) {
+<mat-error>{{ error }}</mat-error>
+}
 </mat-form-field>
