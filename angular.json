@@ -20,7 +20,8 @@
           "options": {
             "allowedCommonJsDependencies": [
               "lodash",
-              "moment"
+              "moment",
+              "file-saver"
             ],
             "outputPath": "dist/angular-boilerplate-v2",
             "index": "src/index.html",
