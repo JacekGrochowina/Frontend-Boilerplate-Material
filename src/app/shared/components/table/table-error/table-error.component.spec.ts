@@ -8,8 +8,8 @@ describe('TableErrorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableErrorComponent ]
-    })
+    imports: [TableErrorComponent]
+})
     .compileComponents();
   });
 

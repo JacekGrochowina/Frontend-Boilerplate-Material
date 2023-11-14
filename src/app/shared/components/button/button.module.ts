@@ -7,8 +7,7 @@ import { RouterLink } from "@angular/router";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-  declarations: [ButtonComponent],
-  imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink, MatProgressSpinnerModule],
-  exports: [ButtonComponent],
+    imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink, MatProgressSpinnerModule, ButtonComponent],
+    exports: [ButtonComponent],
 })
 export class ButtonModule {}

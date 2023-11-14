@@ -1,11 +1,24 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { LoginFormControlType, LoginFormGroupType } from './types';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AppRouting } from '../../../../utils';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { RouterLink } from '@angular/router';
+import { InputPasswordComponent } from '../../../../shared/components/input-password/input-password.component';
+import { InputComponent } from '../../../../shared/components/input/input.component';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    InputComponent,
+    InputPasswordComponent,
+    RouterLink,
+    ButtonComponent,
+  ],
 })
 export class LoginFormComponent {
 

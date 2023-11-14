@@ -4,15 +4,13 @@ import { AuthWrapperComponent } from './auth-wrapper.component';
 import { MatCardModule } from "@angular/material/card";
 
 @NgModule({
-  declarations: [
-    AuthWrapperComponent
-  ],
-  exports: [
-    AuthWrapperComponent
-  ],
-  imports: [
-    CommonModule,
-    MatCardModule
-  ]
+    exports: [
+        AuthWrapperComponent
+    ],
+    imports: [
+        CommonModule,
+        MatCardModule,
+        AuthWrapperComponent
+    ]
 })
 export class AuthWrapperModule {}

@@ -6,10 +6,10 @@ import { FilesDownloadService } from '../../../../../../shared/services/files-do
 
 @Component({
   selector: 'app-downloaders',
+  templateUrl: './downloaders.component.html',
+  styleUrl: './downloaders.component.scss',
   standalone: true,
   imports: [CommonModule, HeaderPageModule, ButtonModule],
-  templateUrl: './downloaders.component.html',
-  styleUrl: './downloaders.component.scss'
 })
 export class DownloadersComponent {
   constructor(private filesDownloadService: FilesDownloadService) {}

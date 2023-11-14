@@ -10,18 +10,16 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
-  declarations: [
-    TableComponent,
-    TableContentComponent,
-    TableEmptyComponent,
-    TableErrorComponent,
-    TableLoadingComponent,
-  ],
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-  ],
-  exports: [TableComponent],
+    imports: [
+        CommonModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        TableComponent,
+        TableContentComponent,
+        TableEmptyComponent,
+        TableErrorComponent,
+        TableLoadingComponent,
+    ],
+    exports: [TableComponent],
 })
 export class TableModule {}

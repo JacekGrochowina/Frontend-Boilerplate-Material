@@ -1,12 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { SidenavItemType } from '../../../../types';
 import { DashboardRouting } from '../../../../../../utils';
 import { environment } from '../../../../../../../../../environments/environment';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-nav-list-item',
   templateUrl: './nav-list-item.component.html',
-  styleUrls: ['./nav-list-item.component.scss']
+  styleUrl: './nav-list-item.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MatListModule, RouterLinkActive, RouterLink, MatIconModule]
 })
 export class NavListItemComponent {
 

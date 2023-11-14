@@ -2,12 +2,26 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { Observable, of } from 'rxjs';
 import { ThemePalette } from '@angular/material/core';
 import { ButtonAppearanceType, ButtonType } from './types';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
+  styleUrl: './button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    RouterLink,
+    NgTemplateOutlet,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    AsyncPipe,
+  ],
 })
 export class ButtonComponent {
 

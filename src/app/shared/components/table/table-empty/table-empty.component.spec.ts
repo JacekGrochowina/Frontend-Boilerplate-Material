@@ -8,8 +8,8 @@ describe('TableEmptyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableEmptyComponent ]
-    })
+    imports: [TableEmptyComponent]
+})
     .compileComponents();
   });
 
