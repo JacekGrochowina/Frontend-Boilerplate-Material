@@ -28,6 +28,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/buttons/buttons.module').then((m) => m.ButtonsModule),
       },
+      {
+        path: ShowcaseRouting.downloaders,
+        loadChildren: () =>
+          import('./pages/downloaders/downloaders.module').then((m) => m.DownloadersModule),
+      }
     ]
   }
 ];

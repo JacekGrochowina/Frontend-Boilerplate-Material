@@ -21,6 +21,10 @@ export const SHOWCASE_TREE_DATA: ShowcaseTreeNode[] = [
       {
         displayName: 'Przyciski',
         link: ShowcaseRouting.buttons,
+      },
+      {
+        displayName: 'Pobieranie plików',
+        link: ShowcaseRouting.downloaders,
       }
     ]
   }

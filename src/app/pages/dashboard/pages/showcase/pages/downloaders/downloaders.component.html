@@ -1,0 +1,51 @@
+<app-header-page
+  title="Pobieranie plików"
+  subtitle="Przykłady użycia serwisu do pobierania plików"
+  [hasOptionBackToParent]="true"
+></app-header-page>
+
+<div class="row">
+  <div class="col-6">
+    <h4 class="downloaders-title">Obsługa pliku PDF</h4>
+    <div class="d-flex">
+      <app-button
+        appearanceAttribute="flat"
+        icon="file_open"
+        label="Otwórz"
+        color="primary"
+        class="me-2"
+        (buttonClickEvent)="openFilePDF($event)"
+      />
+
+      <app-button
+        appearanceAttribute="flat"
+        icon="download"
+        label="Pobierz"
+        color="primary"
+        (buttonClickEvent)="downloadFilePDF($event)"
+      />
+    </div>
+  </div>
+
+  <div class="col-6">
+    <h4 class="downloaders-title">Obsługa pliku XLSX</h4>
+    <div class="d-flex">
+      <app-button
+        appearanceAttribute="flat"
+        icon="file_open"
+        label="Otwórz"
+        color="primary"
+        class="me-2"
+        (buttonClickEvent)="openFileXLSX($event)"
+      />
+
+      <app-button
+        appearanceAttribute="flat"
+        icon="download"
+        label="Pobierz"
+        color="primary"
+        (buttonClickEvent)="downloadFileXLSX($event)"
+      />
+    </div>
+  </div>
+</div>

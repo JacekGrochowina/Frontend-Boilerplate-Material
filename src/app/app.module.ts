@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MomentLang } from './shared/utils/enums/moment-lang.enum';
 import * as moment from 'moment';
 import 'moment/locale/pl';
+import { HttpClientModule } from '@angular/common/http';
 
 moment.locale(MomentLang.polish);
 
@@ -18,6 +19,7 @@ moment.locale(MomentLang.polish);
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
   ],
   providers: [],

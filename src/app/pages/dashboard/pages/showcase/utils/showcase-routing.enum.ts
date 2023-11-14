@@ -3,4 +3,5 @@ export enum ShowcaseRouting {
   tableBasic = 'table-basic',
   tableCollapse = 'table-collapse',
   buttons = 'buttons',
+  downloaders = 'downloaders',
 }
