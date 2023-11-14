@@ -7,8 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [InputPasswordComponent],
-  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule],
-  exports: [InputPasswordComponent],
+    imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule, MatIconModule, InputPasswordComponent],
+    exports: [InputPasswordComponent],
 })
 export class InputPasswordModule {}

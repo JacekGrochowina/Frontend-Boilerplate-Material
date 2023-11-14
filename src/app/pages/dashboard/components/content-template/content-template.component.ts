@@ -1,9 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-content-template',
   templateUrl: './content-template.component.html',
-  styleUrls: ['./content-template.component.scss']
+  styleUrl: './content-template.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MatCardModule]
 })
 export class ContentTemplateComponent {
 

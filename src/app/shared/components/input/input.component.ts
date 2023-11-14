@@ -15,12 +15,16 @@ import {
   FormControlDirective,
   FormControlStatus,
   NG_VALUE_ACCESSOR,
-  Validators,
+  ReactiveFormsModule,
+  Validators
 } from '@angular/forms';
 import { InputTypeAttribute } from './types/input.type';
-import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { MatFormFieldAppearance, MatFormFieldModule } from '@angular/material/form-field';
 import { distinctUntilChanged, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { ValidationService } from "../../services/validation.service";
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-input',
@@ -33,6 +37,14 @@ import { ValidationService } from "../../services/validation.service";
   ],
   templateUrl: './input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
 })
 export class InputComponent implements OnInit, ControlValueAccessor {
 

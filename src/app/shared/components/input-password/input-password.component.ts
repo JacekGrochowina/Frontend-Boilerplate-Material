@@ -6,12 +6,16 @@ import {
   FormControlDirective,
   FormControlStatus,
   NG_VALUE_ACCESSOR,
-  Validators,
+  ReactiveFormsModule,
+  Validators
 } from '@angular/forms';
-import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { MatFormFieldAppearance, MatFormFieldModule } from '@angular/material/form-field';
 import { distinctUntilChanged, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { ValidationService } from "../../services/validation.service";
 import { InputPasswordTypeAttribute } from "./types/input.type";
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-input-password',
@@ -24,6 +28,14 @@ import { InputPasswordTypeAttribute } from "./types/input.type";
   ],
   templateUrl: './input-password.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
 })
 export class InputPasswordComponent implements OnInit, ControlValueAccessor {
 

@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRouting } from './utils';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { environment } from '../../../environments/environment';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
@@ -18,23 +17,23 @@ const routes: Routes = [
       {
         path: DashboardRouting.home,
         loadChildren: () =>
-          import('./pages/home/home.module').then((m) => m.HomeModule),
+          import('./pages/home/routing').then((m) => m.routes),
       },
       {
         path: DashboardRouting.settings,
         loadChildren: () =>
-          import('./pages/settings/settings.module').then((m) => m.SettingsModule),
+          import('./pages/settings/routing').then((m) => m.routes),
       },
       /*
         The following route is hidden in a production environment as it contains
-        only example implementations of reusable components.
+        only example implementations of reusable components and services.
         Please enable it for development and testing purposes.
-       */
+      */
       ...(environment.production ? [] : [
         {
           path: DashboardRouting.showcase,
           loadChildren: () =>
-            import('./pages/showcase/showcase.module').then((m) => m.ShowcaseModule),
+            import('./pages/showcase/routing').then((m) => m.routes),
         },
       ]),
       {
@@ -44,9 +43,3 @@ const routes: Routes = [
     ],
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class DashboardRoutingModule {}

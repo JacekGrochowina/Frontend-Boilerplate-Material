@@ -8,18 +8,16 @@ import { RouterLink } from '@angular/router';
 
 
 @NgModule({
-  declarations: [
-    HeaderPageComponent
-  ],
-  exports: [
-    HeaderPageComponent
-  ],
-  imports: [
-    CommonModule,
-    MatDividerModule,
-    MatIconModule,
-    MatButtonModule,
-    RouterLink,
-  ]
+    exports: [
+        HeaderPageComponent
+    ],
+    imports: [
+        CommonModule,
+        MatDividerModule,
+        MatIconModule,
+        MatButtonModule,
+        RouterLink,
+        HeaderPageComponent,
+    ]
 })
 export class HeaderPageModule {}

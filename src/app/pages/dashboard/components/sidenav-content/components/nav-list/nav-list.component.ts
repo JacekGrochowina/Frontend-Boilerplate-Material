@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DashboardRouting } from "../../../../utils";
 import { SidenavItemType } from "../../types";
+import { NavListItemComponent } from './components/nav-list-item/nav-list-item.component';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-nav-list',
   templateUrl: './nav-list.component.html',
-  styleUrls: ['./nav-list.component.scss']
+  styleUrl: './nav-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MatListModule, NavListItemComponent]
 })
 export class NavListComponent {
 

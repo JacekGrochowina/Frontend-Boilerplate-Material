@@ -1,9 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-header-page',
   templateUrl: './header-page.component.html',
-  styleUrls: ['./header-page.component.scss']
+  styleUrl: './header-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MatIconModule, MatButtonModule, RouterLink, MatDividerModule, NgClass]
 })
 export class HeaderPageComponent {
 
