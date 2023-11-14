@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderPageModule } from '../../../../../../shared/components/header-page';
-import { ButtonModule } from '../../../../../../shared/components/button';
 import { FilesDownloadService } from '../../../../../../shared/services/files-download.service';
+import { HeaderPageComponent } from '../../../../../../shared/components/header-page/header-page.component';
+import { ButtonComponent } from '../../../../../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-downloaders',
   templateUrl: './downloaders.component.html',
   styleUrl: './downloaders.component.scss',
   standalone: true,
-  imports: [CommonModule, HeaderPageModule, ButtonModule],
+  imports: [CommonModule, HeaderPageComponent, ButtonComponent],
 })
 export class DownloadersComponent {
   constructor(private filesDownloadService: FilesDownloadService) {}
