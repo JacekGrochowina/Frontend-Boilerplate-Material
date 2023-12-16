@@ -1,17 +1,17 @@
 @if (loading$ | async) {
-<app-table-loading></app-table-loading>
+  <app-table-loading></app-table-loading>
 }
 
 @if (isTableErrorVisible$ | async) {
-<app-table-error [error$]="error$"></app-table-error>
+  <app-table-error [error$]="error$"></app-table-error>
 }
 
 @if (isTableEmptyVisible$ | async) {
-<app-table-empty></app-table-empty>
+  <app-table-empty></app-table-empty>
 }
 
 @if (isTableContentVisible$ | async) {
-<app-table-content>
-  <ng-content></ng-content>
-</app-table-content>
+  <app-table-content>
+    <ng-content></ng-content>
+  </app-table-content>
 }

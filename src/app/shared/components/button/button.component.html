@@ -1,110 +1,109 @@
-
 @switch (appearanceAttribute) {
   <!-- basic -->
   @case ('basic') {
-  <div>
-    <button
-      (click)="click($event)"
-      [color]="color"
-      [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
-      [type]="typeAttribute"
-      [routerLink]="routerLinkAttribute"
-      [class]="class"
-      mat-button
-    >
-      <ng-container [ngTemplateOutlet]="templateLabel"/>
-    </button>
-  </div>
-}
+    <div>
+      <button
+        (click)="click($event)"
+        [color]="color"
+        [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
+        [type]="typeAttribute"
+        [routerLink]="routerLinkAttribute"
+        [class]="class"
+        mat-button
+      >
+        <ng-container [ngTemplateOutlet]="templateLabel" />
+      </button>
+    </div>
+  }
 
   <!-- raised -->
   @case ('raised') {
-  <div>
-    <button
-      (click)="click($event)"
-      [color]="color"
-      [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
-      [type]="typeAttribute"
-      [routerLink]="routerLinkAttribute"
-      [class]="class"
-      mat-raised-button
-    >
-      <ng-container [ngTemplateOutlet]="templateLabel"/>
-    </button>
-  </div>
-}
+    <div>
+      <button
+        (click)="click($event)"
+        [color]="color"
+        [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
+        [type]="typeAttribute"
+        [routerLink]="routerLinkAttribute"
+        [class]="class"
+        mat-raised-button
+      >
+        <ng-container [ngTemplateOutlet]="templateLabel" />
+      </button>
+    </div>
+  }
 
   <!-- stroked -->
   @case ('stroked') {
-  <div>
-    <button
-      (click)="click($event)"
-      [color]="color"
-      [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
-      [type]="typeAttribute"
-      [routerLink]="routerLinkAttribute"
-      [class]="class"
-      mat-stroked-button
-    >
-      <ng-container [ngTemplateOutlet]="templateLabel"/>
-    </button>
-  </div>
-}
+    <div>
+      <button
+        (click)="click($event)"
+        [color]="color"
+        [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
+        [type]="typeAttribute"
+        [routerLink]="routerLinkAttribute"
+        [class]="class"
+        mat-stroked-button
+      >
+        <ng-container [ngTemplateOutlet]="templateLabel" />
+      </button>
+    </div>
+  }
 
   <!-- flat -->
   @case ('flat') {
-  <div>
-    <button
-      (click)="click($event)"
-      [color]="color"
-      [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
-      [type]="typeAttribute"
-      [routerLink]="routerLinkAttribute"
-      [class]="class"
-      mat-flat-button
-    >
-      <ng-container [ngTemplateOutlet]="templateLabel"/>
-    </button>
-  </div>
-}
+    <div>
+      <button
+        (click)="click($event)"
+        [color]="color"
+        [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
+        [type]="typeAttribute"
+        [routerLink]="routerLinkAttribute"
+        [class]="class"
+        mat-flat-button
+      >
+        <ng-container [ngTemplateOutlet]="templateLabel" />
+      </button>
+    </div>
+  }
 
   <!-- icon -->
   @case ('icon') {
-  <div>
-    <button
-      (click)="click($event)"
-      [color]="color"
-      [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
-      [type]="typeAttribute"
-      [routerLink]="routerLinkAttribute"
-      [class]="class"
-      mat-icon-button
-    >
-      <ng-container [ngTemplateOutlet]="templateIcon"/>
-    </button>
-  </div>
-}
+    <div>
+      <button
+        (click)="click($event)"
+        [color]="color"
+        [disabled]="disabledAttribute || (disabledAttribute$ | async) || (isLoading$ | async) || isLoading"
+        [type]="typeAttribute"
+        [routerLink]="routerLinkAttribute"
+        [class]="class"
+        mat-icon-button
+      >
+        <ng-container [ngTemplateOutlet]="templateIcon" />
+      </button>
+    </div>
+  }
 }
 
 
 <ng-template #templateLabel>
   <div class="d-flex align-items-center">
     @if ((isLoading$ | async) || isLoading) {
-<ng-container
-     
-      [ngTemplateOutlet]="spinner"
-    />
-}
+      <ng-container
+
+        [ngTemplateOutlet]="spinner"
+      />
+    }
 
     @if (icon) {
-<mat-icon
-     
-      [inline]="inline"
-      class="icon me-2"
-    >
-      {{ icon }}
-    </mat-icon>
-}
+      <mat-icon
+
+        [inline]="inline"
+        class="icon me-2"
+      >
+        {{ icon }}
+      </mat-icon>
+    }
     <span>{{ label }}</span>
   </div>
 </ng-template>

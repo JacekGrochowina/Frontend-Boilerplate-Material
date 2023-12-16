@@ -10,18 +10,18 @@
     matInput
   />
   @if (control.value && !control.disabled) {
-<button
-    (click)="clearValue()"
+    <button
+      (click)="clearValue()"
    
-    color="primary"
-    mat-icon-button
-    matSuffix
-    type="button"
-  >
-    <mat-icon>close</mat-icon>
-  </button>
-}
+      color="primary"
+      mat-icon-button
+      matSuffix
+      type="button"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  }
   @if (error) {
-<mat-error>{{ error }}</mat-error>
-}
+    <mat-error>{{ error }}</mat-error>
+  }
 </mat-form-field>

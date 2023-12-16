@@ -1,24 +1,24 @@
 <div class="header-page mb-3">
   <div class="d-flex align-items-center" [ngClass]="hasOptionBackToParent ? 'py-3' : 'p-3'">
     @if (isIconVisible) {
-<div class="header-page__icon">
-      <mat-icon color="primary">{{ icon }}</mat-icon>
-    </div>
-}
+      <div class="header-page__icon">
+        <mat-icon color="primary">{{ icon }}</mat-icon>
+      </div>
+    }
 
     @if (hasOptionBackToParent) {
-<div class="header-page__btn">
-      <button mat-icon-button color="primary" [routerLink]="'../'">
-        <mat-icon>chevron_left</mat-icon>
-      </button>
-    </div>
-}
+      <div class="header-page__btn">
+        <button mat-icon-button color="primary" [routerLink]="'../'">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
+    }
 
     <div class="header-page__content">
       <h1 class="header-page__title">{{ title }}</h1>
       @if (subtitle) {
-<h2 class="header-page__subtitle">{{ subtitle }}</h2>
-}
+        <h2 class="header-page__subtitle">{{ subtitle }}</h2>
+      }
     </div>
   </div>
 
