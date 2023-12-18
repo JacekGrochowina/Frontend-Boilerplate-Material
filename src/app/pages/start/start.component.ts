@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AppRouting } from '../../utils';
-import { ButtonComponent } from '../../shared/components/button/button.component';
+import { AppRouting } from '@app/utils';
+import { ButtonComponent } from '@shared/components/button/button.component';
 
 @Component({
   selector: 'app-start',

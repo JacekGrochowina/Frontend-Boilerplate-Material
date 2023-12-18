@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ContentTemplateComponent } from '../../components/content-template/content-template.component';
+
+import { ContentTemplateComponent } from '@pages/dashboard/components/content-template/content-template.component';
 
 @Component({
   selector: 'app-showcase',

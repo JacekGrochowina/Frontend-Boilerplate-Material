@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  author: 'Author Name',
+  author: 'Jacek Grochowina',
+  apiUrl: 'http://localhost:8080'
 };

@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
-import { DashboardRouting } from './utils';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { environment } from '../../../environments/environment';
+
+import { environment } from '@environments/environment';
+import { DashboardComponent } from '@pages/dashboard/dashboard.component';
+import { DashboardRouting } from '@pages/dashboard/utils';
+import { PageNotFoundComponent } from '@pages/dashboard/pages/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   {
@@ -12,17 +13,17 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: DashboardRouting.home,
-        pathMatch: 'full',
+        pathMatch: 'full'
       },
       {
         path: DashboardRouting.home,
         loadChildren: () =>
-          import('./pages/home/routing').then((m) => m.routes),
+          import('./pages/home/routing').then((m) => m.routes)
       },
       {
         path: DashboardRouting.settings,
         loadChildren: () =>
-          import('./pages/settings/routing').then((m) => m.routes),
+          import('./pages/settings/routing').then((m) => m.routes)
       },
       /*
         The following route is hidden in a production environment as it contains
@@ -33,13 +34,13 @@ export const routes: Routes = [
         {
           path: DashboardRouting.showcase,
           loadChildren: () =>
-            import('./pages/showcase/routing').then((m) => m.routes),
-        },
+            import('./pages/showcase/routing').then((m) => m.routes)
+        }
       ]),
       {
         path: '**',
-        component: PageNotFoundComponent,
-      },
-    ],
+        component: PageNotFoundComponent
+      }
+    ]
   }
 ];

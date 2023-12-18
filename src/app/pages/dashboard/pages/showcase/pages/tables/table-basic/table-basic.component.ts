@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../shared/utils/data.service';
 import { AsyncPipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { TableComponent } from '../../../../../../../shared/components/table/table.component';
-import { ButtonComponent } from '../../../../../../../shared/components/button/button.component';
-import { HeaderPageComponent } from '../../../../../../../shared/components/header-page/header-page.component';
+
+import { TableComponent } from '@shared/components/table/table.component';
+import { ButtonComponent } from '@shared/components/button/button.component';
+import { HeaderPageComponent } from '@shared/components/header-page/header-page.component';
 
 @Component({
   selector: 'app-table-basic',
@@ -23,7 +24,7 @@ export class TableBasicComponent implements OnInit {
   protected displayedColumns: string[] = [
     'username',
     'email',
-    'vehicle',
+    'vehicle'
   ];
 
   constructor(protected dataService: DataService) {}

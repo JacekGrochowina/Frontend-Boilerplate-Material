@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { DashboardRouting } from "../../utils";
-import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { ButtonComponent } from '@shared/components/button/button.component';
+import { DashboardRouting } from '@pages/dashboard/utils';
 
 @Component({
   selector: 'app-page-not-found',
@@ -13,7 +14,7 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 export class PageNotFoundComponent {
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   protected backToHomePage(event: MouseEvent): void {

@@ -1,7 +1,7 @@
-import { ShowcaseTreeNode } from './showcase-tree-node.interface';
-import { ShowcaseRouting } from './showcase-routing.enum';
+import { IShowcaseTreeNode } from '@pages/dashboard/pages/showcase/utils/showcase-tree-node.interface';
+import { ShowcaseRouting } from '@pages/dashboard/pages/showcase/utils/showcase-routing.enum';
 
-export const SHOWCASE_TREE_DATA: ShowcaseTreeNode[] = [
+export const SHOWCASE_TREE_DATA: IShowcaseTreeNode[] = [
   {
     displayName: 'Główne komponenty',
     children: [
@@ -10,22 +10,22 @@ export const SHOWCASE_TREE_DATA: ShowcaseTreeNode[] = [
         children: [
           {
             displayName: 'Tabela - podstawowa',
-            link: ShowcaseRouting.tableBasic,
+            link: ShowcaseRouting.tableBasic
           },
           {
             displayName: 'Tabela - rozwijane wiersze',
-            link: ShowcaseRouting.tableCollapse,
+            link: ShowcaseRouting.tableCollapse
           }
-        ],
+        ]
       },
       {
         displayName: 'Przyciski',
-        link: ShowcaseRouting.buttons,
+        link: ShowcaseRouting.buttons
       },
       {
         displayName: 'Pobieranie plików',
-        link: ShowcaseRouting.downloaders,
+        link: ShowcaseRouting.downloaders
       }
     ]
   }
-]
+];

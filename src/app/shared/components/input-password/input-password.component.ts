@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit, ViewChild, } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
 import {
   ControlContainer,
   ControlValueAccessor,
@@ -10,12 +10,13 @@ import {
   Validators
 } from '@angular/forms';
 import { MatFormFieldAppearance, MatFormFieldModule } from '@angular/material/form-field';
-import { distinctUntilChanged, Observable, Subject, takeUntil, tap } from 'rxjs';
-import { ValidationService } from "../../services/validation.service";
-import { InputPasswordTypeAttribute } from "./types/input.type";
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { distinctUntilChanged, Observable, Subject, takeUntil, tap } from 'rxjs';
+
+import { ValidationService } from '@shared/services/validation.service';
+import { InputPasswordTypeAttribute } from '@shared/components/input-password/types';
 
 @Component({
   selector: 'app-input-password',
@@ -23,8 +24,8 @@ import { MatInputModule } from '@angular/material/input';
     {
       multi: true,
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputPasswordComponent),
-    },
+      useExisting: forwardRef(() => InputPasswordComponent)
+    }
   ],
   templateUrl: './input-password.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,8 +35,8 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatIconModule,
-  ],
+    MatIconModule
+  ]
 })
 export class InputPasswordComponent implements OnInit, ControlValueAccessor {
 

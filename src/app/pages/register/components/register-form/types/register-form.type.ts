@@ -1,11 +1,11 @@
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from '@angular/forms';
 
 export type RegisterType = {
-  name: string | null;
-  surname: string | null;
-  email: string | null;
-  password: string | null;
-  confirmPassword: string | null;
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
 
 export type RegisterFormGroupType = FormGroup<{

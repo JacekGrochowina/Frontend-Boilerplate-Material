@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { combineLatest, Observable, Subject } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { map, takeUntil } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
-import { TableContentComponent } from './table-content/table-content.component';
-import { TableEmptyComponent } from './table-empty/table-empty.component';
-import { TableErrorComponent } from './table-error/table-error.component';
-import { TableLoadingComponent } from './table-loading/table-loading.component';
+import { map, takeUntil } from 'rxjs/operators';
+import { combineLatest, Observable, Subject } from 'rxjs';
+
+import { TableLoadingComponent } from '@shared/components/table/table-loading/table-loading.component';
+import { TableErrorComponent } from '@shared/components/table/table-error/table-error.component';
+import { TableEmptyComponent } from '@shared/components/table/table-empty/table-empty.component';
+import { TableContentComponent } from '@shared/components/table/table-content/table-content.component';
 
 @Component({
   selector: 'app-table',
@@ -19,8 +20,8 @@ import { TableLoadingComponent } from './table-loading/table-loading.component';
     TableErrorComponent,
     TableEmptyComponent,
     TableContentComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+  ]
 })
 export class TableComponent implements OnInit, OnDestroy {
 

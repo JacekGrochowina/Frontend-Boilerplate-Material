@@ -1,7 +1,7 @@
-import { ShowcaseRouting } from './showcase-routing.enum';
+import { ShowcaseRouting } from '@pages/dashboard/pages/showcase/utils/showcase-routing.enum';
 
-export interface ShowcaseTreeNode {
+export interface IShowcaseTreeNode {
   displayName: string;
   link?: ShowcaseRouting;
-  children?: ShowcaseTreeNode[];
+  children?: IShowcaseTreeNode[];
 }

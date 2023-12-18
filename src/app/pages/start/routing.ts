@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { StartComponent } from "./start.component";
+import { StartComponent } from '@pages/start/start.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: StartComponent,
+    component: StartComponent
   }
 ];

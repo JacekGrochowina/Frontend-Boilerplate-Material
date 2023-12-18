@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { RegisterFormComponent } from './components/register-form/register-form.component';
-import { AuthWrapperComponent } from '../../shared/components/auth-wrapper/auth-wrapper.component';
+import { AuthWrapperComponent } from '@shared/components/auth-wrapper/auth-wrapper.component';
+import { RegisterFormComponent } from '@pages/register/components/register-form/register-form.component';
 
 @Component({
   selector: 'app-register',

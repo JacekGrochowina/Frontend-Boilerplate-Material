@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DataService } from '../shared/utils/data.service';
-import { DataItem } from '../shared/utils/data-item.interface';
+import { IDataItem } from '../shared/utils/data-item.interface';
 import { AsyncPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
-import { TableComponent } from '../../../../../../../shared/components/table/table.component';
-import { ButtonComponent } from '../../../../../../../shared/components/button/button.component';
-import { HeaderPageComponent } from '../../../../../../../shared/components/header-page/header-page.component';
+
+import { TableComponent } from '@shared/components/table/table.component';
+import { ButtonComponent } from '@shared/components/button/button.component';
+import { HeaderPageComponent } from '@shared/components/header-page/header-page.component';
 
 @Component({
   selector: 'app-table-basic',
@@ -18,8 +19,8 @@ import { HeaderPageComponent } from '../../../../../../../shared/components/head
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+    ])
   ],
   standalone: true,
   imports: [
@@ -29,8 +30,8 @@ import { HeaderPageComponent } from '../../../../../../../shared/components/head
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    AsyncPipe,
-  ],
+    AsyncPipe
+  ]
 })
 export class TableCollapseComponent implements OnInit {
 
@@ -41,7 +42,7 @@ export class TableCollapseComponent implements OnInit {
 
   protected displayedColumns = ['username', 'email', 'vehicle'];
   protected displayedColumnsWithExpand = [...this.displayedColumns, 'expand'];
-  protected expandedElement!: DataItem | null;
+  protected expandedElement!: IDataItem | null;
 
   constructor(protected dataService: DataService) {}
 

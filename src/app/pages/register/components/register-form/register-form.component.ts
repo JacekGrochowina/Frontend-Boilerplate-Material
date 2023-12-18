@@ -1,12 +1,22 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { RegisterFormControlType, RegisterFormGroupType } from './types/register-form.type';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AppRouting } from '../../../../utils';
-import { CustomValidators } from '../../../../shared/utils/validators/custom-validators';
-import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { RouterLink } from '@angular/router';
-import { InputPasswordComponent } from '../../../../shared/components/input-password/input-password.component';
-import { InputComponent } from '../../../../shared/components/input/input.component';
+import { AsyncPipe } from '@angular/common';
+import { combineLatest, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { InputPasswordComponent } from '@shared/components/input-password/input-password.component';
+import { InputComponent } from '@shared/components/input/input.component';
+import { ButtonComponent } from '@shared/components/button/button.component';
+import {
+  RegisterFormControlType,
+  RegisterFormGroupType,
+  RegisterType
+} from '@pages/register/components/register-form/types';
+import { AuthFacade } from '@store/auth/auth.facade';
+import { CustomValidators } from '@shared/utils/validators/custom-validators';
+import { AppRouting } from '@app/utils';
+import { IRegisterRequest } from '@store/auth/interfaces/register-request.interface';
 
 @Component({
   selector: 'app-register-form',
@@ -19,36 +29,47 @@ import { InputComponent } from '../../../../shared/components/input/input.compon
     InputPasswordComponent,
     RouterLink,
     ButtonComponent,
-  ],
+    AsyncPipe
+  ]
 })
 export class RegisterFormComponent {
 
+  protected loading$ = this.authFacade.loading$;
   protected formGroup!: RegisterFormGroupType;
+
   @Output() submitted = new EventEmitter<void>();
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private authFacade: AuthFacade,
+    private formBuilder: FormBuilder
+  ) {
     this.formGroup = this.formBuilder.group<RegisterFormControlType>({
-      name: this.formBuilder.control(null, {
-        validators: [Validators.required]
+      name: this.formBuilder.control('', {
+        validators: [Validators.required],
+        nonNullable: true
       }),
-      surname: this.formBuilder.control(null, {
-        validators: [Validators.required]
+      surname: this.formBuilder.control('', {
+        validators: [Validators.required],
+        nonNullable: true
       }),
-      email: this.formBuilder.control(null, {
-        validators: [Validators.required, Validators.email]
+      email: this.formBuilder.control('', {
+        validators: [Validators.required, Validators.email],
+        nonNullable: true
       }),
-      password: this.formBuilder.control(null, {
+      password: this.formBuilder.control('', {
         validators: [
           Validators.required,
           CustomValidators.matchValues('confirmPassword', true)
-        ]
+        ],
+        nonNullable: true
       }),
-      confirmPassword: this.formBuilder.control(null, {
+      confirmPassword: this.formBuilder.control('', {
         validators: [
           Validators.required,
           CustomValidators.matchValues('password')
-        ]
-      }),
+        ],
+        nonNullable: true
+      })
     });
   }
 
@@ -56,27 +77,55 @@ export class RegisterFormComponent {
     return `./../${AppRouting.login}`;
   }
 
-  protected get name(): FormControl<string | null> {
+  protected get name(): FormControl<RegisterType['name']> {
     return this.formGroup.controls.name;
   }
 
-  protected get surname(): FormControl<string | null> {
+  protected get surname(): FormControl<RegisterType['surname']> {
     return this.formGroup.controls.surname;
   }
 
-  protected get email(): FormControl<string | null> {
+  protected get email(): FormControl<RegisterType['email']> {
     return this.formGroup.controls.email;
   }
 
-  protected get password(): FormControl<string | null> {
+  protected get password(): FormControl<RegisterType['password']> {
     return this.formGroup.controls.password;
   }
 
-  protected get confirmPassword(): FormControl<string | null> {
+  protected get confirmPassword(): FormControl<RegisterType['confirmPassword']> {
     return this.formGroup.controls.confirmPassword;
   }
 
-  protected handleSubmit() {
+  protected get isSubmitDisabled$(): Observable<boolean> {
+    return combineLatest([
+      of(this.formGroup.invalid),
+      this.loading$
+    ]).pipe(
+      map(([isInvalidForm, isLoading]) => isInvalidForm || isLoading)
+    );
+  }
+
+  protected handleSubmit(): void {
+    const request = this.getRequestValue();
+    this.authFacade.register(request);
+
     this.submitted.emit();
+  }
+
+  private getRequestValue(): IRegisterRequest {
+    const {
+      name,
+      surname,
+      email,
+      password
+    } = this.formGroup.getRawValue();
+
+    return {
+      name,
+      surname,
+      email,
+      password
+    };
   }
 }

@@ -1,4 +1,4 @@
-export interface DataItem {
+export interface IDataItem {
   userId: string;
   username: string;
   email: string;

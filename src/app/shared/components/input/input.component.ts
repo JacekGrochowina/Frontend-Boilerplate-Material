@@ -6,7 +6,7 @@ import {
   Input,
   OnInit,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import {
   ControlContainer,
@@ -18,13 +18,14 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { InputTypeAttribute } from './types/input.type';
 import { MatFormFieldAppearance, MatFormFieldModule } from '@angular/material/form-field';
 import { distinctUntilChanged, Observable, Subject, takeUntil, tap } from 'rxjs';
-import { ValidationService } from "../../services/validation.service";
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+
+import { ValidationService } from '@shared/services/validation.service';
+import { InputTypeAttribute } from '@shared/components/input/types';
 
 @Component({
   selector: 'app-input',
@@ -32,8 +33,8 @@ import { MatInputModule } from '@angular/material/input';
     {
       multi: true,
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
-    },
+      useExisting: forwardRef(() => InputComponent)
+    }
   ],
   templateUrl: './input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,8 +44,8 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatIconModule,
-  ],
+    MatIconModule
+  ]
 })
 export class InputComponent implements OnInit, ControlValueAccessor {
 

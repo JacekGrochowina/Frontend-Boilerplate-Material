@@ -50,7 +50,9 @@
     <app-button
       appearanceAttribute="flat"
       typeAttribute="submit"
-      label="Zarejestruj się">
+      label="Zarejestruj się"
+      [disabledAttribute$]="isSubmitDisabled$"
+      [isLoading$]="loading$">
     </app-button>
   </div>
 </form>

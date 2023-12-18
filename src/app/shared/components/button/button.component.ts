@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ThemePalette } from '@angular/material/core';
-import { ButtonAppearanceType, ButtonType } from './types';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+
+import { ButtonAppearanceType, ButtonType } from '@shared/components/button/types';
 
 @Component({
   selector: 'app-button',
@@ -20,8 +21,8 @@ import { MatButtonModule } from '@angular/material/button';
     NgTemplateOutlet,
     MatIconModule,
     MatProgressSpinnerModule,
-    AsyncPipe,
-  ],
+    AsyncPipe
+  ]
 })
 export class ButtonComponent {
 

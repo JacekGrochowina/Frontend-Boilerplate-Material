@@ -1,8 +1,8 @@
-import { DataItem } from './data-item.interface';
+import { IDataItem } from './data-item.interface';
 import { faker } from '@faker-js/faker';
 
-const createRandomItems = (): DataItem[] => {
-  const randomItems: DataItem[] = [];
+const createRandomItems = (): IDataItem[] => {
+  const randomItems: IDataItem[] = [];
 
   for (let i = 0; i < 10; i++) {
     randomItems.push({
@@ -13,11 +13,11 @@ const createRandomItems = (): DataItem[] => {
       vehicle: faker.vehicle.vehicle(),
       password: faker.internet.password(),
       birthdate: faker.date.birthdate(),
-      registeredAt: faker.date.past(),
-    })
+      registeredAt: faker.date.past()
+    });
   }
 
   return randomItems;
-}
+};
 
 export const DATA_MOCK = createRandomItems();

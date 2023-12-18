@@ -24,7 +24,9 @@
     <app-button
       appearanceAttribute="flat"
       typeAttribute="submit"
-      label="Zaloguj się">
+      label="Zaloguj się"
+      [disabledAttribute$]="isSubmitDisabled$"
+      [isLoading$]="loading$">
     </app-button>
   </div>
 </form>

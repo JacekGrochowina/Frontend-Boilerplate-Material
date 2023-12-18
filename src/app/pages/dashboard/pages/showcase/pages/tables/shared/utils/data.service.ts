@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, of, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DataItem } from './data-item.interface';
+import { IDataItem } from './data-item.interface';
 import { DATA_MOCK } from './data.mock';
 import { ERROR_RESPONSE_MOCK } from './error-response.mock';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class DataService {
 
-  public dataMockListItems$ = new BehaviorSubject<DataItem[]>([]);
+  public dataMockListItems$ = new BehaviorSubject<IDataItem[]>([]);
   public dataMockListLoading$ = new BehaviorSubject<boolean>(false);
   public dataMockListSuccess$ = new BehaviorSubject<boolean>(false);
   public dataMockListError$ = new BehaviorSubject<HttpErrorResponse | null>(null);
@@ -33,7 +33,7 @@ export class DataService {
         }
 
         this.dataMockListLoading$.next(false);
-      }),
+      })
     ).subscribe();
   }
 }

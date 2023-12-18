@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { first, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { FileFormat } from '../utils/types/file-format.type';
 import { map } from 'rxjs/operators';
 import { saveAs } from 'file-saver';
+import { FileFormat } from '@shared/utils/types/file-format.type';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class FilesDownloadService {
   constructor(private http: HttpClient) {}

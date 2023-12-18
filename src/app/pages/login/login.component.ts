@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { AuthWrapperComponent } from '../../shared/components/auth-wrapper/auth-wrapper.component';
+
+import { AuthWrapperComponent } from '@shared/components/auth-wrapper/auth-wrapper.component';
+import { LoginFormComponent } from '@pages/login/components/login-form/login-form.component';
 
 @Component({
   selector: 'app-login',

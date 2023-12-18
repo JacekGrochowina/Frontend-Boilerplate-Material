@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { HeaderPageComponent } from '../../../../shared/components/header-page/header-page.component';
-import { ContentTemplateComponent } from '../../components/content-template/content-template.component';
+
+import { ContentTemplateComponent } from '@pages/dashboard/components/content-template/content-template.component';
+import { HeaderPageComponent } from '@shared/components/header-page/header-page.component';
 
 @Component({
   selector: 'app-settings',
