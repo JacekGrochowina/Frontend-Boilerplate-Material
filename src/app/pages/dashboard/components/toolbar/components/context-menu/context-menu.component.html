@@ -3,12 +3,12 @@
 </button>
 
 <mat-menu #menu="matMenu">
-  @for (contextMenuItem of contextMenuList; track contextMenuItem) {
-  
+  @for (contextMenuItem of contextMenuList;track contextMenuItem) {
+
     <button (click)="contextMenuItem.action()" mat-menu-item>
       <mat-icon color="primary">{{ contextMenuItem.icon }}</mat-icon>
       <span>{{ contextMenuItem.name }}</span>
     </button>
-  
-}
+
+  }
 </mat-menu>
