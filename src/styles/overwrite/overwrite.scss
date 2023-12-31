@@ -1,1 +1,14 @@
 @import "./material";
+@import "styles/mixins";
+
+:root {
+  --mat-menu-item-label-text-size: 14px;
+}
+
+.mat-mdc-menu-item {
+  min-height: 35px !important;
+
+  .mat-icon {
+    @include material-icon-size(17px);
+  }
+}

@@ -2,10 +2,10 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 
 import { ISettingsState } from '@store/settings/interfaces/settings-state.interface';
 import { settingsActions } from '@store/settings/settings.actions';
-import { ThemeModeType } from '@shared/utils/types/theme-mode.type';
+import { getInitialThemeMode, toggleThemeMode } from '@store/settings/settings.service';
 
 const initialState: ISettingsState = {
-  themeMode: 'light'
+  themeMode: getInitialThemeMode()
 };
 
 const settingsFeature = createFeature({
@@ -15,7 +15,7 @@ const settingsFeature = createFeature({
 
     on(settingsActions.toggleThemeMode, (state) => ({
       ...state,
-      themeMode: (state.themeMode === 'light' ? 'dark' : 'light') as ThemeModeType
+      themeMode: toggleThemeMode(state.themeMode)
     }))
   )
 });

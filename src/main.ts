@@ -11,6 +11,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { authFeatureKey, authReducer } from '@store/auth/auth.reducers';
 import { provideEffects } from '@ngrx/effects';
 import * as authEffects from './app/store/auth/auth.effects';
+import * as settingsEffects from './app/store/settings/settings.effects';
 import { addHeaderInterceptor } from '@shared/utils/interceptors/add-header.interceptor';
 import { settingsFeatureKey, settingsReducer } from '@store/settings/settings.reducers';
 
@@ -34,6 +35,7 @@ bootstrapApplication(AppComponent, {
 
     // Effects
     provideEffects(authEffects),
+    provideEffects(settingsEffects),
 
     provideStoreDevtools({
       maxAge: 25,
