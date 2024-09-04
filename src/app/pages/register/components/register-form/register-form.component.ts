@@ -44,11 +44,11 @@ export class RegisterFormComponent {
     private formBuilder: FormBuilder
   ) {
     this.formGroup = this.formBuilder.group<RegisterFormControlType>({
-      name: this.formBuilder.control('', {
+      firstName: this.formBuilder.control('', {
         validators: [Validators.required],
         nonNullable: true
       }),
-      surname: this.formBuilder.control('', {
+      lastName: this.formBuilder.control('', {
         validators: [Validators.required],
         nonNullable: true
       }),
@@ -77,12 +77,12 @@ export class RegisterFormComponent {
     return `./../${AppRouting.login}`;
   }
 
-  protected get name(): FormControl<RegisterType['name']> {
-    return this.formGroup.controls.name;
+  protected get name(): FormControl<RegisterType['firstName']> {
+    return this.formGroup.controls.firstName;
   }
 
-  protected get surname(): FormControl<RegisterType['surname']> {
-    return this.formGroup.controls.surname;
+  protected get surname(): FormControl<RegisterType['lastName']> {
+    return this.formGroup.controls.lastName;
   }
 
   protected get email(): FormControl<RegisterType['email']> {
@@ -115,15 +115,15 @@ export class RegisterFormComponent {
 
   private getRequestValue(): IRegisterRequest {
     const {
-      name,
-      surname,
+      firstName,
+      lastName,
       email,
       password
     } = this.formGroup.getRawValue();
 
     return {
-      name,
-      surname,
+      firstName,
+      lastName,
       email,
       password
     };

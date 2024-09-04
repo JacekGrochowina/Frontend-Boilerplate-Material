@@ -1,5 +1,6 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { inject } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { catchError, from, of, switchMap, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -10,7 +11,6 @@ import { ILoginResponse, IRegisterResponse } from '@store/auth/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardRouting } from '@pages/dashboard/utils';
 import { AppRouting } from '@app/utils';
-import { Store } from '@ngrx/store';
 
 export const registerEffect = createEffect((
   actions$ = inject(Actions),
