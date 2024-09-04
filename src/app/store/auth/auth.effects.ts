@@ -56,7 +56,6 @@ export const loginEffect = createEffect((
 
 export const loginSuccessEffect = createEffect((
   actions$ = inject(Actions),
-  authService = inject(AuthService),
   router = inject(Router),
   route = inject(ActivatedRoute)
 ) => {
