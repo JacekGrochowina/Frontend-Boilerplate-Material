@@ -14,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
   imports: [RouterOutlet, AsyncPipe]
 })
 export class AppComponent implements OnInit, OnDestroy {
+
   private unsubscribe$ = new Subject<boolean>();
   private themeMode$ = this.settingsFacade.themeMode$;
   protected isLightMode$ = this.settingsFacade.isLightMode$;

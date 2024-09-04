@@ -37,11 +37,11 @@ export class LoginFormComponent {
     private formBuilder: FormBuilder
   ) {
     this.formGroup = this.formBuilder.group<LoginFormControlType>({
-      email: this.formBuilder.control('', {
+      email: this.formBuilder.control('piotr.nowak@example.com', {
         validators: [Validators.required, Validators.email],
         nonNullable: true
       }),
-      password: this.formBuilder.control('', {
+      password: this.formBuilder.control('123456', {
         validators: [Validators.required],
         nonNullable: true
       })

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { SidenavItemType } from '../../../../types';
-import { DashboardRouting } from '../../../../../../utils';
-import { environment } from '../../../../../../../../../environments/environment';
+import { DashboardRouting } from '@pages/dashboard/utils';
+import { environment } from '@environments/environment';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatListModule } from '@angular/material/list';

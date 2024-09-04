@@ -1,5 +1,5 @@
 import { ValidatorFn } from '@angular/forms';
-import { matchValuesValidator } from '@shared/utils/validators/methods/match-values.validator';
+import { matchValuesValidator } from '@shared/utils/validators/methods';
 
 export class CustomValidators {
   static matchValues(matchTo: string, reverse?: boolean): ValidatorFn {

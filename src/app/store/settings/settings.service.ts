@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { ThemeModeType } from '@shared/utils/types/theme-mode.type';
+import { ThemeModeType } from '@shared/utils/types';
 import { SettingsFacade } from '@store/settings/settings.facade';
 import { take } from 'rxjs';
 

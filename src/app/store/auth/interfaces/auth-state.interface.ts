@@ -1,5 +1,5 @@
-import { ILoginResponse } from '@store/auth/interfaces/login-response.interface';
-import { IBasicErrorResponse } from '@shared/utils/interfaces/http/basic-error-response.interface';
+import { ILoginResponse } from '@store/auth/interfaces';
+import { IBasicErrorResponse } from '@shared/utils/interfaces';
 
 export interface ICurrentUser extends ILoginResponse {}
 

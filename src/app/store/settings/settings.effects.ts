@@ -7,9 +7,8 @@ import { tap } from 'rxjs';
 export const toggleThemeModeEffect = createEffect((
   actions$ = inject(Actions),
   settingsService = inject(SettingsService)
-) => {
-  return actions$.pipe(
+) =>
+  actions$.pipe(
     ofType(settingsActions.toggleThemeMode),
     tap(() => settingsService.toggleThemeMode())
-  );
-}, { functional: true, dispatch: false });
+  ), { functional: true, dispatch: false });

@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 
-import { ISettingsState } from '@store/settings/interfaces/settings-state.interface';
+import { ISettingsState } from '@store/settings/interfaces';
 import { settingsActions } from '@store/settings/settings.actions';
 import { getInitialThemeMode, toggleThemeMode } from '@store/settings/settings.service';
 

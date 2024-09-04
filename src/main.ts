@@ -1,19 +1,21 @@
 import { enableProdMode, importProvidersFrom, isDevMode } from '@angular/core';
-import { AppComponent } from '@app/app.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
-import { routes } from '@app/routing';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
-import { environment } from '@environments/environment';
 import { provideRouter } from '@angular/router';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { authFeatureKey, authReducer } from '@store/auth/auth.reducers';
 import { provideEffects } from '@ngrx/effects';
-import * as authEffects from './app/store/auth/auth.effects';
-import * as settingsEffects from './app/store/settings/settings.effects';
-import { addHeaderInterceptor } from '@shared/utils/interceptors/add-header.interceptor';
+
+import { AppComponent } from '@app/app.component';
+import { routes } from '@app/routing';
+import { environment } from '@environments/environment';
+import { authFeatureKey, authReducer } from '@store/auth/auth.reducers';
+import { addHeaderInterceptor } from '@shared/utils/interceptors';
 import { settingsFeatureKey, settingsReducer } from '@store/settings/settings.reducers';
+
+import * as settingsEffects from './app/store/settings/settings.effects';
+import * as authEffects from './app/store/auth/auth.effects';
 
 if (environment.production) {
   enableProdMode();
@@ -41,7 +43,7 @@ bootstrapApplication(AppComponent, {
       maxAge: 25,
       logOnly: !isDevMode(),
       autoPause: true,
-      trace: false,
+      trace: true,
       traceLimit: 75
     }),
     provideAnimations()

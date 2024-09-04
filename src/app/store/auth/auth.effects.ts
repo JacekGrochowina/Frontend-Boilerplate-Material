@@ -5,9 +5,8 @@ import { map } from 'rxjs/operators';
 
 import { AuthService } from '@store/auth/auth.service';
 import { authActions } from '@store/auth/auth.actions';
-import { IBasicResponse } from '@shared/utils/interfaces/http/basic-response.interface';
-import { IBasicErrorResponse } from '@shared/utils/interfaces/http/basic-error-response.interface';
-import { ILoginResponse } from '@store/auth/interfaces/login-response.interface';
+import { IBasicErrorResponse, IBasicResponse } from '@shared/utils/interfaces';
+import { ILoginResponse } from '@store/auth/interfaces';
 
 export const registerEffect = createEffect((
   actions$ = inject(Actions),

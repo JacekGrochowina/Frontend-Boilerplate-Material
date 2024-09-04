@@ -16,7 +16,7 @@ import {
 import { AuthFacade } from '@store/auth/auth.facade';
 import { CustomValidators } from '@shared/utils/validators/custom-validators';
 import { AppRouting } from '@app/utils';
-import { IRegisterRequest } from '@store/auth/interfaces/register-request.interface';
+import { IRegisterRequest } from '@store/auth/interfaces';
 
 @Component({
   selector: 'app-register-form',

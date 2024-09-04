@@ -3,7 +3,7 @@ import { first, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { saveAs } from 'file-saver';
-import { FileFormat } from '@shared/utils/types/file-format.type';
+import { FileFormat } from '@shared/utils/types';
 
 @Injectable({
   providedIn: 'root'

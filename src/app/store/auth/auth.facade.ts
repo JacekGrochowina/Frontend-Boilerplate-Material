@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { IAppState } from '@store/app.state';
-import { IRegisterRequest } from '@store/auth/interfaces/register-request.interface';
+import { ILoginRequest, IRegisterRequest } from '@store/auth/interfaces';
 import { authActions } from '@store/auth/auth.actions';
-import { ILoginRequest } from '@store/auth/interfaces/login-request.interface';
 import { selectCurrentUser, selectError, selectLoading, selectSuccess } from '@store/auth/auth.reducers';
 
 @Injectable({

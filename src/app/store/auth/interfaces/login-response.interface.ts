@@ -1,7 +1,10 @@
 export interface ILoginResponse {
-  id: string;
-  name: string;
-  surname: string;
+  id: number;
+  firstName: string;
+  lastName: string;
   email: string;
-  jwt: string;
+  accessToken: string;
+  refreshToken: string;
+  createdDate: string;
+  updatedDate: string;
 }
