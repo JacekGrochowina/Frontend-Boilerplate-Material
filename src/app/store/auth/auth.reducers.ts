@@ -7,7 +7,8 @@ import { ReducersCommonStates } from '@store/_common';
 const initialState: IAuthState = {
   ...ReducersCommonStates.init(),
   user: null,
-  tokens: null
+  tokens: null,
+  isLogged: false
 };
 
 const authFeature = createFeature({
@@ -54,9 +55,17 @@ const authFeature = createFeature({
       ...ReducersCommonStates.error(action.error)
     })),
 
+    // Logout
+    on(authActions.logout, (state) => ({
+      ...state,
+      isLogged: false,
+      tokens: null
+    })),
+
     // Access Token
     on(authActions.setJwtAccessToken, (state, action) => ({
       ...state,
+      isLogged: true,
       tokens: {
         ...state.tokens,
         accessToken: action.accessToken
@@ -90,5 +99,6 @@ export const {
   selectSuccess,
   selectError,
   selectUser,
-  selectTokens
+  selectTokens,
+  selectIsLogged
 } = authFeature;

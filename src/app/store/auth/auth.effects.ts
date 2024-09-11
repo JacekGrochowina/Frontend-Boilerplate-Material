@@ -71,6 +71,23 @@ export const loginSuccessEffect = createEffect((
   );
 }, { functional: true, dispatch: false });
 
+export const logoutEffect = createEffect((
+  actions$ = inject(Actions),
+  store = inject(Store),
+  router = inject(Router),
+  authService = inject(AuthService)
+) => {
+  return actions$.pipe(
+    ofType(authActions.logout),
+    switchMap(() => {
+      authService.clearJwtAccessToken();
+      store.dispatch(authActions.clear());
+      router.navigate([`/${AppRouting.start}`]);
+      return EMPTY;
+    })
+  );
+}, { functional: true, dispatch: false });
+
 export const setJwtAccessTokenEffect = createEffect((
   actions$ = inject(Actions),
   authService = inject(AuthService)

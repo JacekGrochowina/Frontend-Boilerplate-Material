@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ContextMenuItemType } from "./types";
+import { ContextMenuItemType } from './types';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthFacade } from '@store/auth/auth.facade';
 
 @Component({
   selector: 'app-context-menu',
@@ -18,17 +19,19 @@ export class ContextMenuComponent {
     {
       name: 'Ustawienia',
       icon: 'settings',
-      action: () => this.contextMenuActions.settings(),
+      action: () => this.contextMenuActions.settings()
     },
     {
       name: 'Wyloguj się',
       icon: 'logout',
-      action: () => this.contextMenuActions.logout(),
+      action: () => this.contextMenuActions.logout()
     }
   ];
 
+  constructor(private authFacade: AuthFacade) {}
+
   private contextMenuActions = {
     settings: () => console.log('settings'),
-    logout: () => console.log('logout'),
-  }
+    logout: () => this.authFacade.logout()
+  };
 }

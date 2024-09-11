@@ -11,4 +11,5 @@ export interface IAuthState {
   error: IBasicErrorResponse | null;
   user: IUser | null;
   tokens: ITokens | null;
+  isLogged: boolean;
 }

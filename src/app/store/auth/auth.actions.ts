@@ -7,6 +7,8 @@ import { IUserResponse } from '@store/auth/interfaces/user-response.interface';
 export const authActions = createActionGroup({
   source: 'auth',
   events: {
+    Clear: emptyProps(),
+
     Register: props<{ request: IRegisterRequest }>(),
     'Register Success': props<{ response: IRegisterResponse, password: string }>(),
     'Register Failure': props<{ error: IBasicErrorResponse }>(),
@@ -15,10 +17,10 @@ export const authActions = createActionGroup({
     'Login Success': props<{ response: ILoginResponse }>(),
     'Login Failure': props<{ error: IBasicErrorResponse }>(),
 
-    Clear: emptyProps(),
+    Logout: emptyProps(),
 
-    setJwtAccessToken: props<{ accessToken: string }>(),
-    checkJwtAccessToken: emptyProps(),
+    SetJwtAccessToken: props<{ accessToken: string }>(),
+    CheckJwtAccessToken: emptyProps(),
 
     GetUser: emptyProps(),
     'Get User Success': props<{ response: IUserResponse }>(),

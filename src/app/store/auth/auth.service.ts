@@ -33,6 +33,11 @@ export class AuthService {
     return this.http.post<ILoginResponse>(url, request);
   }
 
+  public clearJwtAccessToken(): void {
+    const key = this.localStorageService.KEYS.JWT_ACCESS_TOKEN;
+    localStorage.removeItem(key);
+  }
+
   public getJwtAccessToken(): string | null {
     const key = this.localStorageService.KEYS.JWT_ACCESS_TOKEN;
     return localStorage.getItem(key);
