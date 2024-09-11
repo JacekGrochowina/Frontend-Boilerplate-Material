@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
 import { ILoginRequest, ILoginResponse, IRegisterRequest, IRegisterResponse } from '@store/auth/interfaces';
-import { ICurrentUserResponse } from '@store/auth/interfaces/current-user-response.interface';
+import { IUserResponse } from '@store/auth/interfaces/user-response.interface';
 import { LocalStorageService } from '@shared/services/local-storage.service';
 
 @Injectable({
@@ -18,9 +18,9 @@ export class AuthService {
     private localStorageService: LocalStorageService
   ) {}
 
-  public getCurrentUser(): Observable<ICurrentUserResponse> {
-    const url = `${this.apiUrl}/current`;
-    return this.http.get<ICurrentUserResponse>(url);
+  public getCurrentUser(): Observable<IUserResponse> {
+    const url = `${this.apiUrl}/user`;
+    return this.http.get<IUserResponse>(url);
   }
 
   public register(request: IRegisterRequest): Observable<IRegisterResponse> {

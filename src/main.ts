@@ -11,7 +11,7 @@ import { AppComponent } from '@app/app.component';
 import { routes } from '@app/routing';
 import { environment } from '@environments/environment';
 import { authFeatureKey, authReducer } from '@store/auth/auth.reducers';
-import { addHeaderInterceptor } from '@shared/utils/interceptors';
+import { addHeaderInterceptor, authInterceptor } from '@shared/utils/interceptors';
 import { settingsFeatureKey, settingsReducer } from '@store/settings/settings.reducers';
 
 import * as settingsEffects from './app/store/settings/settings.effects';
@@ -24,9 +24,9 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(BrowserModule),
-    provideHttpClient(withInterceptorsFromDi()),
     provideHttpClient(
-      withInterceptors([addHeaderInterceptor])
+      withInterceptorsFromDi(),
+      withInterceptors([addHeaderInterceptor, authInterceptor])
     ),
     provideRouter(routes),
     provideStore(),

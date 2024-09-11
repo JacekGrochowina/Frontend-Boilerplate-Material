@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { IAppState } from '@store/app.state';
 import { ILoginRequest, IRegisterRequest } from '@store/auth/interfaces';
 import { authActions } from '@store/auth/auth.actions';
-import { selectCurrentUser, selectError, selectLoading, selectSuccess } from '@store/auth/auth.reducers';
+import { selectError, selectLoading, selectSuccess, selectTokens, selectUser } from '@store/auth/auth.reducers';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,8 @@ export class AuthFacade {
   public loading$ = this.store.select(selectLoading);
   public success$ = this.store.select(selectSuccess);
   public error$ = this.store.select(selectError);
-  public currentUser$ = this.store.select(selectCurrentUser);
+  public user$ = this.store.select(selectUser);
+  public tokens$ = this.store.select(selectTokens);
 
   constructor(private store: Store<IAppState>) {}
 

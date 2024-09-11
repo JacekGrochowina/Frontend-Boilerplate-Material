@@ -1,16 +1,17 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { catchError, from, of, switchMap, tap } from 'rxjs';
+import { catchError, EMPTY, from, of, switchMap, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AuthService } from '@store/auth/auth.service';
 import { authActions } from '@store/auth/auth.actions';
 import { IBasicErrorResponse } from '@shared/utils/interfaces';
-import { ILoginResponse, IRegisterResponse } from '@store/auth/interfaces';
+import { ILoginResponse, IRegisterResponse, IUserResponse } from '@store/auth/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardRouting } from '@pages/dashboard/utils';
 import { AppRouting } from '@app/utils';
+import { isNull } from 'lodash';
 
 export const registerEffect = createEffect((
   actions$ = inject(Actions),
@@ -56,49 +57,72 @@ export const loginEffect = createEffect((
 
 export const loginSuccessEffect = createEffect((
   actions$ = inject(Actions),
-  authService = inject(AuthService),
-  router = inject(Router),
-  route = inject(ActivatedRoute),
   store = inject(Store)
 ) => {
   return actions$.pipe(
     ofType(authActions.loginSuccess),
     switchMap(({ response }) => {
-      authService.setJwtAccessToken(response.accessToken);
-      // const accessToken = response.accessToken;
-      // store.dispatch(authActions.setJwtAccessToken({ accessToken }));
-      return from(router.navigate([`./${AppRouting.dashboard}/${DashboardRouting.home}`], {
-        relativeTo: route.parent
-      }));
+      const accessToken = response.accessToken;
+      store.dispatch(authActions.setJwtAccessToken({ accessToken }));
+      redirectToDashboardHome();
+      return EMPTY;
     })
   );
 }, { functional: true, dispatch: false });
 
-// export const setJwtAccessToken = createEffect((
-//   actions$ = inject(Actions),
-//   authService = inject(AuthService)
-// ) => {
-//   return actions$.pipe(
-//     ofType(authActions.setJwtAccessToken),
-//     switchMap(({ accessToken }) => {
-//       authService.setJwtAccessToken(accessToken);
-//       return EMPTY;
-//     })
-//   );
-// }, { functional: true, dispatch: false });
-//
-// export const checkJwtAccessToken = createEffect((
-//   actions$ = inject(Actions),
-//   authService = inject(AuthService),
-//   store = inject(Store)
-// ) => {
-//   return actions$.pipe(
-//     ofType(authActions.checkJwtAccessToken),
-//     switchMap(() => {
-//       const accessToken = authService.getJwtAccessToken();
-//       if (isNull(accessToken)) return EMPTY;
-//       store.dispatch(authActions.setJwtAccessToken({ accessToken }));
-//       return EMPTY;
-//     })
-//   );
-// }, { functional: true, dispatch: false });
+export const setJwtAccessTokenEffect = createEffect((
+  actions$ = inject(Actions),
+  authService = inject(AuthService),
+  store = inject(Store)
+) => {
+  return actions$.pipe(
+    ofType(authActions.setJwtAccessToken),
+    switchMap(({ accessToken }) => {
+      authService.setJwtAccessToken(accessToken);
+      store.dispatch(authActions.getUser());
+
+      return EMPTY;
+    })
+  );
+}, { functional: true, dispatch: false });
+
+export const checkJwtAccessTokenEffect = createEffect((
+  actions$ = inject(Actions),
+  authService = inject(AuthService),
+  store = inject(Store)
+) => {
+  return actions$.pipe(
+    ofType(authActions.checkJwtAccessToken),
+    switchMap(() => {
+      const accessToken = authService.getJwtAccessToken();
+      if (isNull(accessToken)) return EMPTY;
+      store.dispatch(authActions.setJwtAccessToken({ accessToken }));
+      store.dispatch(authActions.getUser());
+      return EMPTY;
+    })
+  );
+}, { functional: true, dispatch: false });
+
+export const getCurrentUserEffect = createEffect((
+  actions$ = inject(Actions),
+  authService = inject(AuthService)
+) => {
+  return actions$.pipe(
+    ofType(authActions.getUser),
+    switchMap(() => {
+      return authService.getCurrentUser().pipe(
+        map((response: IUserResponse) => authActions.getUserSuccess({ response })),
+        catchError((error: IBasicErrorResponse) => of(authActions.getUserFailure({ error })))
+      );
+    })
+  );
+}, { functional: true });
+
+const redirectToDashboardHome = (
+  router = inject(Router),
+  route = inject(ActivatedRoute)
+) => {
+  return from(router.navigate([`./${AppRouting.dashboard}/${DashboardRouting.home}`], {
+    relativeTo: route.parent
+  }));
+};

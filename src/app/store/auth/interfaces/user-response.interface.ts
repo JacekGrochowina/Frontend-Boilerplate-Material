@@ -1,3 +1,3 @@
 import { IUser } from '@store/auth/interfaces/user.interface';
 
-export interface ICurrentUserResponse extends IUser {}
+export interface IUserResponse extends IUser {}

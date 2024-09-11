@@ -2,7 +2,7 @@ import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 import { ILoginRequest, ILoginResponse, IRegisterRequest, IRegisterResponse } from '@store/auth/interfaces';
 import { IBasicErrorResponse } from '@shared/utils/interfaces';
-import { ICurrentUserResponse } from '@store/auth/interfaces/current-user-response.interface';
+import { IUserResponse } from '@store/auth/interfaces/user-response.interface';
 
 export const authActions = createActionGroup({
   source: 'auth',
@@ -20,8 +20,8 @@ export const authActions = createActionGroup({
     setJwtAccessToken: props<{ accessToken: string }>(),
     checkJwtAccessToken: emptyProps(),
 
-    CurrentUser: emptyProps(),
-    'Get Current User Success': props<{ response: ICurrentUserResponse }>(),
-    'Get Current User Failure': props<{ error: IBasicErrorResponse }>()
+    GetUser: emptyProps(),
+    'Get User Success': props<{ response: IUserResponse }>(),
+    'Get User Failure': props<{ error: IBasicErrorResponse }>()
   }
 });
