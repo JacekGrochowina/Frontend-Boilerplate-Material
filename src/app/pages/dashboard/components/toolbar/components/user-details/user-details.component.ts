@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+import { isNull } from 'lodash';
+
+import { AuthFacade } from '@store/auth/auth.facade';
 
 @Component({
   selector: 'app-user-details',
@@ -6,41 +12,29 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './user-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
+  imports: [
+    AsyncPipe
+  ]
 })
-export class UserDetailsComponent {
+export class UserDetailsComponent implements OnDestroy {
 
-  protected get avatarInitials(): string {
-    return 'JK';
+  private unsubscribe$ = new Subject<boolean>();
+
+  protected user$ = this.authFacade.user$;
+
+  protected get avatarInitials$(): Observable<string> {
+    return this.user$.pipe(
+      takeUntil(this.unsubscribe$),
+      map((user) =>
+        isNull(user) ? '' : `${user.firstName[0]}${user.lastName[0]}`
+      ));
   }
 
-  protected get userName(): string {
-    return 'Jan';
-  }
+  constructor(private authFacade: AuthFacade) {}
 
-  protected get userSurname(): string {
-    return 'Kowalski';
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.unsubscribe();
   }
-
-  protected get userEmail(): string {
-    return 'jan.kowalski@gmail.com';
-  }
-
-  // protected contextMenuList: ContextMenuItemType[] = [
-  //   {
-  //     name: 'Ustawienia',
-  //     icon: 'settings',
-  //     action: () => this.contextMenuActions.settings(),
-  //   },
-  //   {
-  //     name: 'Wygoluj się',
-  //     icon: 'logout',
-  //     action: () => this.contextMenuActions.logout(),
-  //   }
-  // ];
-  //
-  // private contextMenuActions = {
-  //   settings: () => console.log('settings'),
-  //   logout: () => console.log('logout'),
-  // }
 
 }

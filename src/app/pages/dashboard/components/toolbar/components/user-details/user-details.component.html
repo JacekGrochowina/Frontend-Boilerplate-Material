@@ -1,30 +1,12 @@
 <div class="user-details">
   <div class="user-details__avatar avatar">
-    <div class="avatar__image">{{ avatarInitials }}</div>
+    <div class="avatar__image">{{ avatarInitials$ | async }}</div>
   </div>
 
   <div class="user-details__content content">
     <p class="content__text text">
-      {{ userName }} {{ userSurname }}
-      <label class="text__subtext">{{ userEmail }}</label>
+      {{ (user$ | async)?.firstName }} {{ (user$ | async)?.lastName }}
+      <label class="text__subtext">{{ (user$ | async)?.email }}</label>
     </p>
-
-    <!--    <button mat-icon-button>-->
-    <!--      <mat-icon>arrow_drop_down</mat-icon>-->
-    <!--    </button>-->
-
-    <!--    <button mat-icon-button [matMenuTriggerFor]="menu">-->
-    <!--      <mat-icon>more_vert</mat-icon>-->
-    <!--    </button>-->
-
-    <!--    <mat-menu #menu="matMenu">-->
-    <!--      <ng-container *ngFor="let contextMenuItem of contextMenuList">-->
-    <!--        <button (click)="contextMenuItem.action()" mat-menu-item>-->
-    <!--          <mat-icon color="primary">{{ contextMenuItem.icon }}</mat-icon>-->
-    <!--          <span>{{ contextMenuItem.name }}</span>-->
-    <!--        </button>-->
-    <!--      </ng-container>-->
-    <!--    </mat-menu>-->
-
   </div>
 </div>

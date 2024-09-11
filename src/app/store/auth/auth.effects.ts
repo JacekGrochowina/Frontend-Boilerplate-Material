@@ -1,14 +1,14 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { catchError, EMPTY, from, of, switchMap, tap } from 'rxjs';
+import { catchError, EMPTY, of, switchMap, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AuthService } from '@store/auth/auth.service';
 import { authActions } from '@store/auth/auth.actions';
 import { IBasicErrorResponse } from '@shared/utils/interfaces';
 import { ILoginResponse, IRegisterResponse, IUserResponse } from '@store/auth/interfaces';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { DashboardRouting } from '@pages/dashboard/utils';
 import { AppRouting } from '@app/utils';
 import { isNull } from 'lodash';
@@ -57,14 +57,15 @@ export const loginEffect = createEffect((
 
 export const loginSuccessEffect = createEffect((
   actions$ = inject(Actions),
-  store = inject(Store)
+  store = inject(Store),
+  router = inject(Router)
 ) => {
   return actions$.pipe(
     ofType(authActions.loginSuccess),
     switchMap(({ response }) => {
       const accessToken = response.accessToken;
       store.dispatch(authActions.setJwtAccessToken({ accessToken }));
-      redirectToDashboardHome();
+      router.navigate([`/${AppRouting.dashboard}/${DashboardRouting.home}`]);
       return EMPTY;
     })
   );
@@ -79,12 +80,10 @@ export const setJwtAccessTokenEffect = createEffect((
     ofType(authActions.setJwtAccessToken),
     switchMap(({ accessToken }) => {
       authService.setJwtAccessToken(accessToken);
-      store.dispatch(authActions.getUser());
-
-      return EMPTY;
+      return of(authActions.getUser()); // Kontynuacja akcji
     })
   );
-}, { functional: true, dispatch: false });
+}, { functional: true });
 
 export const checkJwtAccessTokenEffect = createEffect((
   actions$ = inject(Actions),
@@ -97,11 +96,10 @@ export const checkJwtAccessTokenEffect = createEffect((
       const accessToken = authService.getJwtAccessToken();
       if (isNull(accessToken)) return EMPTY;
       store.dispatch(authActions.setJwtAccessToken({ accessToken }));
-      store.dispatch(authActions.getUser());
-      return EMPTY;
+      return of(authActions.getUser()); // Zwróć akcję, aby kontynuować cykl
     })
   );
-}, { functional: true, dispatch: false });
+}, { functional: true });
 
 export const getCurrentUserEffect = createEffect((
   actions$ = inject(Actions),
@@ -117,12 +115,3 @@ export const getCurrentUserEffect = createEffect((
     })
   );
 }, { functional: true });
-
-const redirectToDashboardHome = (
-  router = inject(Router),
-  route = inject(ActivatedRoute)
-) => {
-  return from(router.navigate([`./${AppRouting.dashboard}/${DashboardRouting.home}`], {
-    relativeTo: route.parent
-  }));
-};
