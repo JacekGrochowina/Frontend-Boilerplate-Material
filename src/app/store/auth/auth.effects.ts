@@ -1,17 +1,17 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { catchError, EMPTY, of, switchMap, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { isNull } from 'lodash';
 
+import { AppRouting } from '@app/utils';
+import { DashboardRouting } from '@pages/dashboard/utils';
 import { AuthService } from '@store/auth/auth.service';
 import { authActions } from '@store/auth/auth.actions';
 import { IBasicErrorResponse } from '@shared/utils/interfaces';
 import { ILoginResponse, IRegisterResponse, IUserResponse } from '@store/auth/interfaces';
-import { Router } from '@angular/router';
-import { DashboardRouting } from '@pages/dashboard/utils';
-import { AppRouting } from '@app/utils';
-import { isNull } from 'lodash';
 
 export const registerEffect = createEffect((
   actions$ = inject(Actions),
@@ -73,14 +73,13 @@ export const loginSuccessEffect = createEffect((
 
 export const setJwtAccessTokenEffect = createEffect((
   actions$ = inject(Actions),
-  authService = inject(AuthService),
-  store = inject(Store)
+  authService = inject(AuthService)
 ) => {
   return actions$.pipe(
     ofType(authActions.setJwtAccessToken),
     switchMap(({ accessToken }) => {
       authService.setJwtAccessToken(accessToken);
-      return of(authActions.getUser()); // Kontynuacja akcji
+      return of(authActions.getUser());
     })
   );
 }, { functional: true });
@@ -96,10 +95,10 @@ export const checkJwtAccessTokenEffect = createEffect((
       const accessToken = authService.getJwtAccessToken();
       if (isNull(accessToken)) return EMPTY;
       store.dispatch(authActions.setJwtAccessToken({ accessToken }));
-      return of(authActions.getUser()); // Zwróć akcję, aby kontynuować cykl
+      return EMPTY;
     })
   );
-}, { functional: true });
+}, { functional: true, dispatch: false });
 
 export const getCurrentUserEffect = createEffect((
   actions$ = inject(Actions),
