@@ -2,11 +2,10 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 
 import { IAuthState } from '@store/auth/interfaces/auth-state.interface';
 import { authActions } from '@store/auth/auth.actions';
-import { InitialLoadingHandler } from '@shared/utils/models';
 import { ReducersCommonStates } from '@store/_common';
 
 const initialState: IAuthState = {
-  ...InitialLoadingHandler,
+  ...ReducersCommonStates.init(),
   user: null,
   tokens: null
 };
