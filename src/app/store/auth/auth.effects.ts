@@ -56,15 +56,49 @@ export const loginEffect = createEffect((
 
 export const loginSuccessEffect = createEffect((
   actions$ = inject(Actions),
+  authService = inject(AuthService),
   router = inject(Router),
-  route = inject(ActivatedRoute)
+  route = inject(ActivatedRoute),
+  store = inject(Store)
 ) => {
   return actions$.pipe(
     ofType(authActions.loginSuccess),
     switchMap(({ response }) => {
+      authService.setJwtAccessToken(response.accessToken);
+      // const accessToken = response.accessToken;
+      // store.dispatch(authActions.setJwtAccessToken({ accessToken }));
       return from(router.navigate([`./${AppRouting.dashboard}/${DashboardRouting.home}`], {
         relativeTo: route.parent
       }));
     })
   );
 }, { functional: true, dispatch: false });
+
+// export const setJwtAccessToken = createEffect((
+//   actions$ = inject(Actions),
+//   authService = inject(AuthService)
+// ) => {
+//   return actions$.pipe(
+//     ofType(authActions.setJwtAccessToken),
+//     switchMap(({ accessToken }) => {
+//       authService.setJwtAccessToken(accessToken);
+//       return EMPTY;
+//     })
+//   );
+// }, { functional: true, dispatch: false });
+//
+// export const checkJwtAccessToken = createEffect((
+//   actions$ = inject(Actions),
+//   authService = inject(AuthService),
+//   store = inject(Store)
+// ) => {
+//   return actions$.pipe(
+//     ofType(authActions.checkJwtAccessToken),
+//     switchMap(() => {
+//       const accessToken = authService.getJwtAccessToken();
+//       if (isNull(accessToken)) return EMPTY;
+//       store.dispatch(authActions.setJwtAccessToken({ accessToken }));
+//       return EMPTY;
+//     })
+//   );
+// }, { functional: true, dispatch: false });

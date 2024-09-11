@@ -1,10 +1,6 @@
-export interface ILoginResponse {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
+import { IUser } from '@store/auth/interfaces/user.interface';
+
+export interface ILoginResponse extends IUser {
   accessToken: string;
   refreshToken: string;
-  createdDate: string;
-  updatedDate: string;
 }

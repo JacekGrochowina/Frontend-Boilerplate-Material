@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SettingsFacade } from '@store/settings/settings.facade';
 import { AsyncPipe } from '@angular/common';
-import { SettingsService } from '@store/settings/settings.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { SettingsFacade } from '@store/settings/settings.facade';
+import { SettingsService } from '@store/settings/settings.service';
+import { AuthService } from '@store/auth/auth.service';
+import { AuthFacade } from '@store/auth/auth.facade';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +24,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private settingsFacade: SettingsFacade,
+    private authFacade: AuthFacade,
+    private authService: AuthService,
     private settingsService: SettingsService
   ) {}
 
@@ -30,6 +35,9 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe((themeMode) => {
         this.settingsService.changeDialogsThemeMode(themeMode);
       });
+
+    // this.authService.checkJwtAccessToken();
+    this.authFacade.checkJwtAccessToken();
   }
 
   public ngOnDestroy(): void {

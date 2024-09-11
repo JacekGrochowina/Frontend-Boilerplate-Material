@@ -24,4 +24,8 @@ export class AuthFacade {
   public login(request: ILoginRequest): void {
     this.store.dispatch(authActions.login({ request }));
   }
+
+  public checkJwtAccessToken(): void {
+    this.store.dispatch(authActions.checkJwtAccessToken());
+  }
 }
