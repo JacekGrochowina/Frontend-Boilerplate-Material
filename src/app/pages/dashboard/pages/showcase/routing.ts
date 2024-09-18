@@ -24,6 +24,11 @@ export const routes: Routes = [
           import('./pages/tables/table-collapse/routing').then((m) => m.routes)
       },
       {
+        path: ShowcaseRouting.tableHttp,
+        loadChildren: () =>
+          import('./pages/tables/table-http/routing').then((m) => m.routes)
+      },
+      {
         path: ShowcaseRouting.buttons,
         loadChildren: () =>
           import('./pages/buttons/routing').then((m) => m.routes)

@@ -131,3 +131,16 @@ export const getCurrentUserEffect = createEffect((
     })
   );
 }, { functional: true });
+
+export const getCurrentUserFailureEffect = createEffect((
+  actions$ = inject(Actions),
+  store = inject(Store)
+) => {
+  return actions$.pipe(
+    ofType(authActions.getUserFailure),
+    switchMap(() => {
+      store.dispatch(authActions.logout());
+      return EMPTY;
+    })
+  );
+}, { functional: true, dispatch: false });
