@@ -1,10 +1,77 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+  ViewChild
+} from '@angular/core';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { Observable, of, startWith, Subject, switchMap } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ITableInfoChange } from '@shared/components/table/interfaces';
+import { takeUntil } from 'rxjs/operators';
+import { ITableInfo } from '@shared/components/table/interfaces/table-info.interface';
 
 @Component({
   selector: 'app-table-content',
   templateUrl: './table-content.component.html',
   styleUrl: './table-content.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
+  imports: [
+    MatPaginatorModule,
+    AsyncPipe
+  ],
+  standalone: true
 })
-export class TableContentComponent {}
+export class TableContentComponent implements AfterViewInit, OnDestroy {
+
+  // Core Inputs
+  @Input() items$!: Observable<any[]>;
+  @Input() info$!: Observable<ITableInfo>; // needed using pagination, search, filters etc.
+  @Input() loading$!: Observable<boolean>;
+  @Input() success$!: Observable<boolean>;
+  @Input() error$!: Observable<HttpErrorResponse | null>;
+
+  // Settings Inputs
+  @Input() pagination: boolean = false;
+
+  @Output() pageChange = new EventEmitter<ITableInfoChange>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  private unsubscribe$ = new Subject<boolean>();
+
+  protected readonly pageSizeOptions = [5, 10, 25, 50];
+  protected readonly pageSize = 10;
+
+  public ngAfterViewInit(): void {
+    if (this.pagination) this.initPagination();
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.unsubscribe();
+  }
+
+  private initPagination(): void {
+    this.paginator.page
+      .pipe(
+        startWith({}),
+        takeUntil(this.unsubscribe$),
+        switchMap(() => {
+          const pageIndex = this.paginator.pageIndex;
+          const pageSize = this.paginator.pageSize;
+
+          this.pageChange.emit({ page: pageIndex, limit: pageSize });
+
+          return of(null);
+        })
+      )
+      .subscribe();
+  }
+
+}

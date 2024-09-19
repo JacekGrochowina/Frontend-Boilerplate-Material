@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AsyncPipe } from '@angular/common';
 import { map, takeUntil } from 'rxjs/operators';
@@ -8,6 +8,8 @@ import { TableLoadingComponent } from '@shared/components/table/table-loading/ta
 import { TableErrorComponent } from '@shared/components/table/table-error/table-error.component';
 import { TableEmptyComponent } from '@shared/components/table/table-empty/table-empty.component';
 import { TableContentComponent } from '@shared/components/table/table-content/table-content.component';
+import { ITableInfoChange } from '@shared/components/table/interfaces';
+import { ITableInfo } from '@shared/components/table/interfaces/table-info.interface';
 
 @Component({
   selector: 'app-table',
@@ -25,10 +27,17 @@ import { TableContentComponent } from '@shared/components/table/table-content/ta
 })
 export class TableComponent implements OnInit, OnDestroy {
 
+  // Core Inputs
   @Input() items$!: Observable<any[]>;
+  @Input() info$!: Observable<ITableInfo>; // needed using pagination, search, filters etc. 
   @Input() loading$!: Observable<boolean>;
   @Input() success$!: Observable<boolean>;
   @Input() error$!: Observable<HttpErrorResponse | null>;
+
+  // Settings Inputs
+  @Input() pagination: boolean = false;
+
+  @Output() pageChange = new EventEmitter<ITableInfoChange>();
 
   protected isEmpty$!: Observable<boolean>;
   protected isTableErrorVisible$!: Observable<boolean>;
@@ -47,6 +56,10 @@ export class TableComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.unsubscribe$.next(true);
     this.unsubscribe$.unsubscribe();
+  }
+
+  protected onPageChange(event: ITableInfoChange): void {
+    this.pageChange.emit(event);
   }
 
   private getIsEmpty(): Observable<boolean> {

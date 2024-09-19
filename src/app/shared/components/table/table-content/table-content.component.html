@@ -1,1 +1,9 @@
 <ng-content></ng-content>
+
+@if (pagination) {
+  <mat-paginator
+    [length]="(info$ | async)?.total"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageSize]="pageSize"
+  ></mat-paginator>
+}

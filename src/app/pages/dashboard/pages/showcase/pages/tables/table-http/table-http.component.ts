@@ -1,15 +1,18 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { DataService } from '../shared/utils/data.service';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 
 import { TableComponent } from '@shared/components/table/table.component';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { HeaderPageComponent } from '@shared/components/header-page/header-page.component';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, catchError, merge, Observable, of, startWith, switchMap } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ITableInfoChange } from '@shared/components/table/interfaces';
+import { ITableInfo } from '@shared/components/table/interfaces/table-info.interface';
+
+import { DataService } from '../shared/utils/data.service';
 
 @Component({
   selector: 'app-table-http',
@@ -18,15 +21,21 @@ import { map } from 'rxjs/operators';
   standalone: true,
   imports: [HeaderPageComponent, ButtonComponent, TableComponent, MatTableModule, AsyncPipe, MatPaginatorModule]
 })
-export class TableHttpComponent implements OnInit, AfterViewInit {
+export class TableHttpComponent implements OnInit, OnDestroy {
 
-  private exampleDatabase!: ExampleHttpDatabase | null;
+  private unsubscribe$ = new Subject<boolean>();
+  private exampleDatabase: ExampleHttpDatabase = new ExampleHttpDatabase(this.http);
 
   protected data: BehaviorSubject<DataMockItem[]> = new BehaviorSubject<DataMockItem[]>([]);
-  protected resultsLength = 0;
-  protected isLoadingResults: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  protected isSuccessResults: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  protected isRateLimitReached = false;
+  protected info: BehaviorSubject<ITableInfo> = new BehaviorSubject<ITableInfo>({
+    total: 0,
+    page: 0,
+    limit: 10
+  });
+  protected loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  protected success: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  protected error: BehaviorSubject<HttpErrorResponse | null> = new BehaviorSubject<HttpErrorResponse | null>(null);
+
   protected displayedColumns: string[] = [
     'firstName',
     'lastName',
@@ -39,16 +48,20 @@ export class TableHttpComponent implements OnInit, AfterViewInit {
     return this.data.asObservable();
   }
 
+  get dataMockListInfo$() {
+    return this.info.asObservable();
+  }
+
   get dataMockListLoading$() {
-    return this.isLoadingResults.asObservable();
+    return this.loading.asObservable();
   }
 
   get dataMockListSuccess$() {
-    return this.isSuccessResults.asObservable();
+    return this.success.asObservable();
   }
 
   get dataMockListError$() {
-    return of(null);
+    return this.error.asObservable();
   }
 
   constructor(
@@ -57,45 +70,18 @@ export class TableHttpComponent implements OnInit, AfterViewInit {
   ) {}
 
   public ngOnInit(): void {
-    this.dataService.getDataMockList();
+    const info = this.info.getValue();
+    this.exampleDatabase.getDataMockList(info.page, info.limit)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((response) => {
+        this.data.next(response.data);
+        this.info.next(response.info);
+      });
   }
 
-  public ngAfterViewInit(): void {
-    this.exampleDatabase = new ExampleHttpDatabase(this.http);
-
-    merge(this.paginator.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          this.isLoadingResults.next(true);
-          this.isSuccessResults.next(false);
-          return this.exampleDatabase!.getDataMockList(
-            this.paginator.pageIndex,
-            this.paginator.pageSize
-          ).pipe(catchError(() => of(null)));
-        }),
-        map(data => {
-          // Flip flag to show that loading has finished.
-          this.isLoadingResults.next(false);
-          this.isSuccessResults.next(true);
-          this.isRateLimitReached = data === null;
-
-          if (data === null) {
-            return [];
-          }
-
-          // Only refresh the result length if there is new data. In case of rate
-          // limit errors, we do not want to reset the paginator to zero, as that
-          // would prevent users from re-triggering requests.
-          this.resultsLength = data.info.total;
-          return data.data;
-        })
-      )
-      .subscribe(data => (this.data.next(data)));
-
-    this.dataMockListItems$.subscribe((items) => {
-      console.log('items', items);
-    });
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.unsubscribe();
   }
 
   protected onSuccessClick(): void {
@@ -108,6 +94,15 @@ export class TableHttpComponent implements OnInit, AfterViewInit {
 
   protected onEmptyClick(): void {
     this.dataService.getDataMockList(true, true);
+  }
+
+  protected onPageChange(event: ITableInfoChange): void {
+    this.exampleDatabase.getDataMockList(event.page, event.limit)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((response) => {
+        this.data.next(response.data);
+        this.info.next(response.info);
+      });
   }
 }
 
@@ -125,11 +120,7 @@ export interface DataMockItem {
 
 export interface DataMockList {
   data: DataMockItem[],
-  info: {
-    total: number;
-    page: number;
-    limit: number;
-  }
+  info: ITableInfo,
 }
 
 /** An example database that the data source uses to retrieve data for the table. */

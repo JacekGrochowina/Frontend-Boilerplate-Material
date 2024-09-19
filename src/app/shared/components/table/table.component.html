@@ -11,7 +11,12 @@
 }
 
 @if (isTableContentVisible$ | async) {
-  <app-table-content>
+  <app-table-content
+    [items$]="items$"
+    [info$]="info$"
+    [pagination]="pagination"
+    (pageChange)="onPageChange($event)"
+  >
     <ng-content></ng-content>
   </app-table-content>
 }
