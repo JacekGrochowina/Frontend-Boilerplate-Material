@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgClass } from '@angular/common';
+import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-header-page',
@@ -11,7 +12,7 @@ import { NgClass } from '@angular/common';
   styleUrl: './header-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, RouterLink, MatDividerModule, NgClass]
+  imports: [MatIconModule, MatButtonModule, RouterLink, MatDividerModule, NgClass, BreadcrumbComponent]
 })
 export class HeaderPageComponent {
 

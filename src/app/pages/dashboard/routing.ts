@@ -17,11 +17,13 @@ export const routes: Routes = [
       },
       {
         path: DashboardRouting.home,
+        data: { breadcrumb: 'Domowa' },
         loadChildren: () =>
           import('./pages/home/routing').then((m) => m.routes)
       },
       {
         path: DashboardRouting.settings,
+        data: { breadcrumb: 'Ustawienia' },
         loadChildren: () =>
           import('./pages/settings/routing').then((m) => m.routes)
       },
@@ -33,12 +35,14 @@ export const routes: Routes = [
       ...(environment.production ? [] : [
         {
           path: DashboardRouting.showcase,
+          data: { breadcrumb: 'Przykłady (dev)' },
           loadChildren: () =>
             import('./pages/showcase/routing').then((m) => m.routes)
         }
       ]),
       {
         path: '**',
+        data: { breadcrumb: 'Nieznana' },
         component: PageNotFoundComponent
       }
     ]

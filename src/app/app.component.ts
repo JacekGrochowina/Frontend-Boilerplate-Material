@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { SettingsFacade } from '@store/settings/settings.facade';
 import { SettingsService } from '@store/settings/settings.service';
 import { AuthFacade } from '@store/auth/auth.facade';
+import { BreadcrumbService } from '@shared/services/breadcrumb.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private settingsFacade: SettingsFacade,
     private authFacade: AuthFacade,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private breadcrumbService: BreadcrumbService
   ) {}
 
   public ngOnInit(): void {
@@ -35,6 +37,8 @@ export class AppComponent implements OnInit, OnDestroy {
       });
 
     this.authFacade.checkJwtAccessToken();
+
+    this.breadcrumbService.init();
   }
 
   public ngOnDestroy(): void {
