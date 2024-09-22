@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BreadcrumbService } from '@shared/services/breadcrumb.service';
 import { RouterLink } from '@angular/router';
+
+import { BreadcrumbService } from '@shared/services/breadcrumb.service';
+import { IBreadcrumb } from '@shared/components/breadcrumb/interfaces';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -12,7 +14,7 @@ import { RouterLink } from '@angular/router';
 })
 export class BreadcrumbComponent implements OnInit {
 
-  public breadcrumbs: Array<{ label: string, url: string }> = [];
+  public breadcrumbs: IBreadcrumb[] = [];
 
   constructor(private breadcrumbService: BreadcrumbService) {}
 

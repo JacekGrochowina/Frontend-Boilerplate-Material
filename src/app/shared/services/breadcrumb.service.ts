@@ -2,11 +2,13 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { filter } from 'rxjs';
 
+import { IBreadcrumb } from '@shared/components/breadcrumb/interfaces';
+
 @Injectable({
   providedIn: 'root'
 })
 export class BreadcrumbService {
-  public breadcrumbs: Array<{ label: string, url: string }> = [];
+  public breadcrumbs: IBreadcrumb[] = [];
 
   constructor(
     private router: Router,
@@ -21,17 +23,15 @@ export class BreadcrumbService {
     });
   }
 
-  private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: Array<{
+  private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: IBreadcrumb[] = []): Array<{
     label: string,
     url: string
-  }> = []): Array<{ label: string, url: string }> {
+  }> {
     const children: ActivatedRoute[] = route.children;
 
     if (children.length === 0) {
       return breadcrumbs;
     }
-
-    console.log('children', children);
 
     for (const child of children) {
       const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
