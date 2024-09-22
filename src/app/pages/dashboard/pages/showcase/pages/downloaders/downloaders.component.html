@@ -5,7 +5,7 @@
 ></app-header-page>
 
 <div class="row">
-  <div class="col-6">
+  <div class="col-4">
     <h4 class="downloaders-title">Obsługa pliku PDF</h4>
     <div class="d-flex">
       <app-button
@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <div class="col-6">
+  <div class="col-4">
     <h4 class="downloaders-title">Obsługa pliku XLSX</h4>
     <div class="d-flex">
       <app-button
@@ -45,6 +45,28 @@
         label="Pobierz"
         color="primary"
         (buttonClickEvent)="downloadFileXLSX($event)"
+      />
+    </div>
+  </div>
+
+  <div class="col-4">
+    <h4 class="downloaders-title">Obsługa pliku CSV</h4>
+    <div class="d-flex">
+      <app-button
+        appearanceAttribute="flat"
+        icon="file_open"
+        label="Otwórz"
+        color="primary"
+        class="me-2"
+        (buttonClickEvent)="openFileCSV($event)"
+      />
+
+      <app-button
+        appearanceAttribute="flat"
+        icon="download"
+        label="Pobierz"
+        color="primary"
+        (buttonClickEvent)="downloadFileCSV($event)"
       />
     </div>
   </div>

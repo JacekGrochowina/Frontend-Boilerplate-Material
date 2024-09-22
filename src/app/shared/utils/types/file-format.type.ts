@@ -4,3 +4,4 @@ export type FileFormat =
   | 'pdf'
   | 'xlsx'
   | 'zip'
+  | 'csv'
