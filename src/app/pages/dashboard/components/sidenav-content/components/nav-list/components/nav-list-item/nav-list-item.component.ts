@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { SidenavItemType } from '../../../../types';
 import { DashboardRouting } from '@pages/dashboard/utils';
 import { environment } from '@environments/environment';
@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
   templateUrl: './nav-list-item.component.html',
   styleUrl: './nav-list-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [MatListModule, RouterLinkActive, RouterLink, MatIconModule]
 })

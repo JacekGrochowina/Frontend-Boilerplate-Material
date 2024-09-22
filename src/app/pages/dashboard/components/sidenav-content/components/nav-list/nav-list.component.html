@@ -1,9 +1,7 @@
 <nav class="nav-list">
   <mat-nav-list role="navigation" routerLinkActive="active">
     @for (sidenavItem of navList; track sidenavItem) {
-  
       <app-nav-list-item [sidenavItem]="sidenavItem"></app-nav-list-item>
-    
-}
+    }
   </mat-nav-list>
 </nav>

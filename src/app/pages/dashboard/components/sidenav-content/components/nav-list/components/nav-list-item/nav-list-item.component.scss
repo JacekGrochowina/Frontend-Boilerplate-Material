@@ -1,6 +1,20 @@
+app-nav-list-item {
+  mat-list-item.is-active {
+    //background-color: var(--primary-container);
+    background-color: var(--surface-variant);
+  }
+
+  &:first-of-type {
+    .list__item {
+      border-top: 1px solid var(--mat-divider-color);
+    }
+  }
+}
+
 .list__item {
   user-select: none;
   position: relative;
+  border-bottom: 1px solid var(--mat-divider-color);
 
   &::after {
     content: '';
@@ -20,6 +34,7 @@
 
     .item__link {
       transform: translateX(7px);
+      //background-color: var(--primary-container);
     }
   }
 }
