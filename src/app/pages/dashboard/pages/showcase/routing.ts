@@ -27,7 +27,7 @@ export const routes: Routes = [
           import('./pages/tables/table-collapse/routing').then((m) => m.routes)
       },
       {
-        path: ShowcaseRouting.tableHttp,
+        path: ShowcaseRouting.tableHttpPagination,
         data: { breadcrumb: 'Tabela z zapytaniem http' },
         loadChildren: () =>
           import('./pages/tables/table-http/routing').then((m) => m.routes)

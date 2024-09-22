@@ -2,7 +2,7 @@ export enum ShowcaseRouting {
   home = '',
   tableBasic = 'table-basic',
   tableCollapse = 'table-collapse',
-  tableHttp = 'table-http',
+  tableHttpPagination = 'table-http-pagination',
   buttons = 'buttons',
   downloaders = 'downloaders',
 }

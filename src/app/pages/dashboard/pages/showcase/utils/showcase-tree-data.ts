@@ -18,7 +18,7 @@ export const SHOWCASE_TREE_DATA: IShowcaseTreeNode[] = [
           },
           {
             displayName: 'Tabela - zapytania http + paginacja',
-            link: ShowcaseRouting.tableHttp
+            link: ShowcaseRouting.tableHttpPagination
           }
         ]
       },
