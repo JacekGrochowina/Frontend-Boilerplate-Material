@@ -2,6 +2,7 @@
 
 @if (pagination) {
   <mat-paginator
+    showFirstLastButtons
     [length]="(info$ | async)?.total"
     [pageSizeOptions]="pageSizeOptions"
     [pageSize]="pageSize"

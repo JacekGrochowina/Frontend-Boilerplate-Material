@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, catchError, delay, finalize, Observable, of, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
@@ -11,8 +11,6 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 import { HeaderPageComponent } from '@shared/components/header-page/header-page.component';
 import { ITableInfoChange } from '@shared/components/table/interfaces';
 import { ITableInfo } from '@shared/components/table/interfaces/table-info.interface';
-
-import { DataService } from '../shared/utils/data.service';
 
 @Component({
   selector: 'app-table-http',
@@ -64,19 +62,11 @@ export class TableHttpComponent implements OnInit, OnDestroy {
     return this.error.asObservable();
   }
 
-  constructor(
-    private http: HttpClient,
-    protected dataService: DataService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   public ngOnInit(): void {
     const info = this.info.getValue();
-    this.exampleDatabase.getDataMockList(info.page, info.limit)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response) => {
-        this.data.next(response.data);
-        this.info.next(response.info);
-      });
+    this.loadMockData(info.page, info.limit);
   }
 
   public ngOnDestroy(): void {
@@ -85,29 +75,46 @@ export class TableHttpComponent implements OnInit, OnDestroy {
   }
 
   protected onSuccessClick(): void {
-    this.dataService.getDataMockList();
+    const info = this.info.getValue();
+    this.loadMockData(info.page, info.limit);
   }
 
   protected onFailClick(): void {
-    this.dataService.getDataMockList(false);
-  }
-
-  protected onEmptyClick(): void {
-    this.dataService.getDataMockList(true, true);
+    const info = this.info.getValue();
+    this.loadMockData(info.page, info.limit, true);
   }
 
   protected onPageChange(event: ITableInfoChange): void {
-    this.exampleDatabase.getDataMockList(event.page, event.limit)
-      .pipe(takeUntil(this.unsubscribe$))
+    this.loadMockData(event.page, event.limit);
+  }
+
+  private loadMockData(page: number, limit: number, failMock: boolean = false): void {
+    this.error.next(null);
+    this.loading.next(true);
+    this.success.next(false);
+
+    this.exampleDatabase.getDataMockList(page, limit, failMock)
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        delay(2000), // Mock of server delay
+        catchError((error: HttpErrorResponse) => {
+          this.error.next(error);
+          this.loading.next(false);
+          return of({ data: [], info: { total: 0, page: 0, limit: 10 } });
+        }),
+        finalize(() => this.loading.next(false))
+      )
       .subscribe((response) => {
         this.data.next(response.data);
         this.info.next(response.info);
+
+        this.success.next(true);
       });
   }
 }
 
 export interface DataMockItem {
-  id: 1;
+  id: number;
   firstName: string;
   lastName: string;
   phone: string;
@@ -127,9 +134,11 @@ export interface DataMockList {
 export class ExampleHttpDatabase {
   constructor(private http: HttpClient) {}
 
-  getDataMockList(page: number, limit: number): Observable<DataMockList> {
+  getDataMockList(page: number, limit: number, failMock: boolean = false): Observable<DataMockList> {
     const href = 'http://localhost:8080';
-    const requestUrl = `${href}/drivers?page=${page + 1}&limit=${limit}`;
+    const requestUrl = failMock
+      ? `${href}/wrong_url`
+      : `${href}/drivers?page=${page}&limit=${limit}`;
 
     return this.http.get<DataMockList>(requestUrl);
   }

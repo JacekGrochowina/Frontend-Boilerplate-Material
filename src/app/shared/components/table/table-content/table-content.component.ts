@@ -9,7 +9,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { Observable, of, startWith, Subject, switchMap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ITableInfoChange } from '@shared/components/table/interfaces';
@@ -60,18 +60,22 @@ export class TableContentComponent implements AfterViewInit, OnDestroy {
   private initPagination(): void {
     this.paginator.page
       .pipe(
-        startWith({}),
         takeUntil(this.unsubscribe$),
-        switchMap(() => {
-          const pageIndex = this.paginator.pageIndex;
-          const pageSize = this.paginator.pageSize;
+        tap(() => {
+          const page = this.paginator.pageIndex;
+          const limit = this.paginator.pageSize;
 
-          this.pageChange.emit({ page: pageIndex, limit: pageSize });
-
-          return of(null);
+          this.pageChange.emit({ page, limit });
         })
       )
       .subscribe();
+
+    this.info$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((info) => {
+        this.paginator.pageIndex = info.page;
+        this.paginator.pageSize = info.limit;
+      });
   }
 
 }

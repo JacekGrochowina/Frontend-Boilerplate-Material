@@ -29,7 +29,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   // Core Inputs
   @Input() items$!: Observable<any[]>;
-  @Input() info$!: Observable<ITableInfo>; // needed using pagination, search, filters etc. 
+  @Input() info$!: Observable<ITableInfo>; // needed using pagination, search, filters etc.
   @Input() loading$!: Observable<boolean>;
   @Input() success$!: Observable<boolean>;
   @Input() error$!: Observable<HttpErrorResponse | null>;
