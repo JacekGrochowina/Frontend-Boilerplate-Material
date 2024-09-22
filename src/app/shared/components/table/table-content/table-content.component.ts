@@ -11,7 +11,6 @@ import {
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { Observable, Subject, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
 import { ITableInfoChange } from '@shared/components/table/interfaces';
 import { takeUntil } from 'rxjs/operators';
 import { ITableInfo } from '@shared/components/table/interfaces/table-info.interface';
@@ -29,12 +28,9 @@ import { ITableInfo } from '@shared/components/table/interfaces/table-info.inter
 })
 export class TableContentComponent implements AfterViewInit, OnDestroy {
 
-  // Core Inputs
+  // Base Inputs
   @Input() items$!: Observable<any[]>;
   @Input() info$!: Observable<ITableInfo>; // needed using pagination, search, filters etc.
-  @Input() loading$!: Observable<boolean>;
-  @Input() success$!: Observable<boolean>;
-  @Input() error$!: Observable<HttpErrorResponse | null>;
 
   // Settings Inputs
   @Input() pagination: boolean = false;

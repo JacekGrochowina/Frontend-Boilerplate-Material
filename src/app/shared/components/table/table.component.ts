@@ -27,7 +27,7 @@ import { ITableInfo } from '@shared/components/table/interfaces/table-info.inter
 })
 export class TableComponent implements OnInit, OnDestroy {
 
-  // Core Inputs
+  // Base Inputs
   @Input() items$!: Observable<any[]>;
   @Input() info$!: Observable<ITableInfo>; // needed using pagination, search, filters etc.
   @Input() loading$!: Observable<boolean>;
